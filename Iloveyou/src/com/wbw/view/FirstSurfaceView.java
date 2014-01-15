@@ -48,7 +48,7 @@ public class FirstSurfaceView extends SurfaceView implements
 
 	private Handler handler;
 
-	private Font32 font32;
+	//private Font32 font32;
 	
 	private SharedPreferencesXml spxml;
 	public FirstSurfaceView(Context context, int s_w, int s_h, Handler handler) {
@@ -63,7 +63,7 @@ public class FirstSurfaceView extends SurfaceView implements
 		this.holder = getHolder();
 		this.holder.addCallback(this);
 		this.handler = handler;
-		font32 = new Font32(context);
+		//font32 = new Font32(context);
 		//透明
 		setZOrderOnTop(true);
 		holder.setFormat(PixelFormat.TRANSPARENT); 
@@ -175,78 +175,7 @@ public class FirstSurfaceView extends SurfaceView implements
 		sbkmiddright.start();
 	}
 
-	public void show_font32(String s, int stx, int sty, int w, int h,
-			int beishu, int type) {
-		boolean[][] arr = new boolean[32][32]; // 插入的数组
-		arr = font32.drawString(s);
-		int startx = stx, starty = sty;
-		int weith = 32;
-		int height = 32;
-		int bei = beishu;
-		int old_num = -1;
-		int lCount;// 控制列
-		for (int i = 0; i < 32 && !isallstop; i++) {
-			for (int j = 0; j < 32 && !isallstop; j++) {
-				try {
-					Thread.sleep(25);
-				} catch (InterruptedException e1) {
-					// TODO 自动生成的 catch 块
-					e1.printStackTrace();
-				}
-				float xx = (float) j;
-				float yy = (float) i;
-				if (arr[i][j] && !isallstop) {
-
-					Random rm = new Random();
-					Bitmap bitmap = null;
-					int num = 0;
-					if (type == 1) {
-						num = rm.nextInt(heart_all.length - 1);
-						bitmap = bitmapcache
-								.getBitmap(heart_all[num], mContext);
-					} else if (type == 2) {
-						bitmap = bitmapcache.getBitmap(R.drawable.love,
-								mContext);
-					}
-					int bw = bitmap.getWidth();
-					int bh = bitmap.getHeight();
-					synchronized (holder) {
-						Canvas c = null;
-						try {
-
-							// 不要轻易去锁定整个屏幕
-							c = holder.lockCanvas(new Rect(startx + (int) xx
-									* bei, starty + (int) yy * bei, startx
-									+ (int) xx * bei + bw, starty + (int) yy
-									* bei + bh));
-
-							// c = holder.lockCanvas();
-							Paint p = new Paint(); // 创建画笔
-							p.setColor(Color.RED);
-							// 下面这段是保证双缓冲能都画上东西，从而不会闪烁
-
-							c.drawBitmap(bitmap, startx + xx * bei, starty + yy
-									* bei, p);
-
-							old_num = num;
-						} catch (Exception e) {
-							e.printStackTrace();
-						} finally {
-							try{
-								if (c != null){
-									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
-								}
-							}catch(Exception e){
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-			}
-
-		}
-
-	}
+	
 	
 	/**
 	 * 16/24/32,要写的字符，开始的x,y,倍数，花或爱心
@@ -652,6 +581,9 @@ public class FirstSurfaceView extends SurfaceView implements
 	
 	int yadd_1200 = 100;
 
+	//在写文件这个，我最主要还是喜欢由AWT转化而得到的数组，可是awt无法移植到android里，于是使用的点阵字库
+	//点阵字库分16*16，24*24，32*32，48*46，每种又分s,k,h,f(楷宋黑啊什么的),代码里有三种的方法，至于字符库可以自己下载也可
+	//找我要，我把每种都试过，最终选择了HK24s
 	class showWenZi extends Thread {
 		public final int[] mask = { 128, 64, 32, 16, 8, 4, 2, 1 };
 		public final String ZK_PATH = "HZK16";
@@ -696,6 +628,7 @@ public class FirstSurfaceView extends SurfaceView implements
 			
 			int bei = 8;
 			int bei32 = 5;
+			int bei24 = 7;  //24最佳倍数用7
 			//适配
 			if(sh >= 1200) {
 				onestarty = onestarty+yadd_1200;
@@ -708,9 +641,11 @@ public class FirstSurfaceView extends SurfaceView implements
 			if(sw >=600) {
 				bei = 9;
 				bei32= 7;
+				bei24 = 8; 
 			}
 			if(sw>=700){
 				bei32 = 8;
+				bei24 = 9; 
 			}
 					
 			System.out.println("create_wenzi");
@@ -731,7 +666,7 @@ public class FirstSurfaceView extends SurfaceView implements
 			else {
 				//show_font32(one1, onestartx, onestarty, sw, sh, bei32, 2);
 				int bei16 = 8;
-				show_font16(one1, onestartx, onestarty, sw, sh, bei16, 2);
+				show_font16_24_32(24,one1, onestartx, onestarty,  bei24, 2);
 			}
 			//show_font32("楚", 3, 40, 20, 20, 5, 2);
 			
@@ -750,7 +685,7 @@ public class FirstSurfaceView extends SurfaceView implements
 					show_I(twostartx,twostarty, 20, 20, "array_ling.txt", bei, 2);
 				else if(two1.equals("娟"))
 					show_I(twostartx, twostarty, 20, 20, "array_juang.txt", bei, 2);
-				else show_font32(two1, twostartx,twostarty, sw, sh, bei32, 2);
+				else show_font16_24_32(24,two1, twostartx,twostarty,  bei24, 2);
 			}
 			
 			//show_I(sw / 2 + 60, 40, 20, 20, "array_chu.txt", 8, 2);

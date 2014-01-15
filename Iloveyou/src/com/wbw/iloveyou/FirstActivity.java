@@ -108,7 +108,7 @@ public class FirstActivity extends Activity
     }
     
     System.out.println("w:"+screen_w+"  h:"+screen_h);
-    
+    Toast.makeText(mContext, "如果您使用的是源码，请有空帮我下载一个广告积分，无空则勿理吧！祝君开心幸福！", Toast.LENGTH_LONG).show();
   }
   
   
