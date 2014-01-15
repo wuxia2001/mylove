@@ -30,4 +30,5 @@
     <color name="darkturquoise">#00CED1</color> <!-- 暗宝石绿 -->
     <color name="deepskyblue">#00BFFF</color> <!-- 深天蓝色 -->
     <color name="blueblue">#99def7</color>
+    <color name="huang">#ffff00</color>
 </resources>

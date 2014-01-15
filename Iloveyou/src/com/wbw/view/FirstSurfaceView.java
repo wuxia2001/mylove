@@ -7,7 +7,10 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 import com.wbw.iloveyou.R;
+import com.wbw.inter.AllSurfaceView;
 import com.wbw.util.BitmapCache;
+import com.wbw.util.Font32;
+import com.wbw.util.SharedPreferencesXml;
 import com.wbw.util.Util;
 
 import android.content.Context;
@@ -15,17 +18,18 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.PorterDuff.Mode;
 import android.os.Handler;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class FirstSurfaceView extends SurfaceView implements
-		SurfaceHolder.Callback {
+		SurfaceHolder.Callback,AllSurfaceView {
+	private volatile boolean isallstop = false;
 	// 图片软引用
 	BitmapCache bitmapcache;
-	// 背景颜色
-	int co;
 	int w;
 	int h;
 	// 画爱心的蝴蝶
@@ -39,10 +43,12 @@ public class FirstSurfaceView extends SurfaceView implements
 	ShowBackgroundThread sbthread;
 	int[] xin_all = { R.drawable.xin1, R.drawable.xin2, R.drawable.xin3,
 			R.drawable.xin4 };
-	private boolean isrun = true;
 
 	private Handler handler;
 
+	private Font32 font32;
+	
+	private SharedPreferencesXml spxml;
 	public FirstSurfaceView(Context context, int s_w, int s_h, Handler handler) {
 		super(context);
 		// TODO 自动生成的构造函数存根
@@ -51,57 +57,73 @@ public class FirstSurfaceView extends SurfaceView implements
 		this.w = s_w;
 		this.h = s_h;
 		this.mContext = context;
-		this.co = context.getResources().getColor(R.color.black);
 		this.bitmapcache = BitmapCache.getInstance();
 		this.holder = getHolder();
 		this.holder.addCallback(this);
 		this.handler = handler;
+		font32 = new Font32(context);
+		//透明
+		setZOrderOnTop(true);
+		holder.setFormat(PixelFormat.TRANSPARENT); 
 		goOn();
+		spxml = SharedPreferencesXml.init();
 	}
 
+	private Thread goonthread ;
+	private Thread shthread;
+	private Thread swzthread;
+	private Thread sxthread;
+	private Thread sbkup,sbkdown,sbkmiddleft,sbkmiddright;
+	public void setRun(boolean is){
+		isallstop = is;
+		if(isallstop){
+			goonthread.interrupt();
+			if(shthread != null && shthread.isAlive())
+				shthread.interrupt();
+			if(swzthread != null && swzthread.isAlive())
+				swzthread.interrupt();
+			if(sxthread != null && sxthread.isAlive())
+				sxthread.interrupt();
+			if(sbkup != null && sbkup.isAlive())
+				sbkup.interrupt();
+			if(sbkdown != null && sbkdown.isAlive())
+				sbkdown.interrupt();
+			if(sbkmiddleft != null && sbkmiddleft.isAlive())
+				sbkmiddleft.interrupt();
+			if(sbkmiddright != null && sbkmiddright.isAlive())
+				sbkmiddright.interrupt();
+		}
+	}
+	
 	// 计数器，三个线程全部运行完时自动跳到新界面
-	final CountDownLatch begin = new CountDownLatch(3);
+	final CountDownLatch begin = new CountDownLatch(7);
 
+	
 	public void goOn() {
-		new Thread(new Runnable() {
+		
+		goonthread = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO 自动生成的方法存根
 				try {
 					begin.await();
-					Thread.sleep(5000);
+					Thread.sleep(500);
+					handler.sendEmptyMessage(4);
 				} catch (InterruptedException e) {
 					// TODO 自动生成的 catch 块
 					e.printStackTrace();
 				}
-				handler.sendEmptyMessage(4);
 			}
-		}).start();
+		});
+		goonthread.start();
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO 自动生成的方法存根
 		System.out.println("create");
-		int ii = 0;
-		// 画背景，因为surfaceview用的是双缓冲，所以一定要画两次，把前景和缓冲背景都画上，画任何东西都一样
-		while (ii < 3) {
-			synchronized (holder) {
-				Canvas c = null;
-				try {
-					c = holder.lockCanvas();
-					c.drawColor(co);
-					Thread.sleep(100);
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
-				}
-
-			}
-			ii++;
-		}
+		showB(); 
 	}
 
 	@Override
@@ -121,23 +143,105 @@ public class FirstSurfaceView extends SurfaceView implements
 		this.holder = getHolder();
 		this.holder.addCallback(this);
 	}
-
+	
 	public void showHeart() // 画心
 	{
-		new showheart(this.holder, "showback", this.w, this.h).start();
+		shthread = new showheart(this.holder, "showback", this.w, this.h);
+		shthread.start();
 	}
 
 	public void showWenzi() // 画文字
 	{
-		new showWenZi(this.holder, "showwenzi", "", this.w, this.h).start();
+		swzthread = new showWenZi(this.holder, "showwenzi", "", this.w, this.h);
+		swzthread.start();
 	}
 
 	public void showXin() // 画星星
 	{
-		new ShowBackgroundThread(this.holder, "showback", this.w, this.h)
-				.start();
+		sxthread = new ShowBackgroundThread(this.holder, "showback", this.w, this.h);
+		sxthread.start();
+	}
+	public void showB(){
+		sbkup = new ShowBianKuang(R.drawable.upmidd, w, h, 1, 3);
+		sbkdown = new ShowBianKuang(R.drawable.downmidd, w, h, 2, 3);
+		sbkmiddleft = new ShowBianKuang(R.drawable.midd_midd_left, w, h, 3, 3);
+		sbkmiddright = new ShowBianKuang(R.drawable.midd_midd_right, w, h, 4, 3);
+		sbkup.start();
+		sbkdown.start();
+		sbkmiddleft.start();
+		sbkmiddright.start();
 	}
 
+	public void show_font32(String s, int stx, int sty, int w, int h,
+			int beishu, int type) {
+		boolean[][] arr = new boolean[32][32]; // 插入的数组
+		arr = font32.drawString(s);
+		int startx = stx, starty = sty;
+		int weith = 32;
+		int height = 32;
+		int bei = beishu;
+		int old_num = -1;
+		int lCount;// 控制列
+		for (int i = 0; i < 32 && !isallstop; i++) {
+			for (int j = 0; j < 32 && !isallstop; j++) {
+				try {
+					Thread.sleep(25);
+				} catch (InterruptedException e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+				float xx = (float) j;
+				float yy = (float) i;
+				if (arr[i][j] && !isallstop) {
+
+					Random rm = new Random();
+					Bitmap bitmap = null;
+					int num = 0;
+					if (type == 1) {
+						num = rm.nextInt(heart_all.length - 1);
+						bitmap = bitmapcache
+								.getBitmap(heart_all[num], mContext);
+					} else if (type == 2) {
+						bitmap = bitmapcache.getBitmap(R.drawable.love,
+								mContext);
+					}
+					int bw = bitmap.getWidth();
+					int bh = bitmap.getHeight();
+					synchronized (holder) {
+						Canvas c = null;
+						try {
+
+							// 不要轻易去锁定整个屏幕
+							c = holder.lockCanvas(new Rect(startx + (int) xx
+									* bei, starty + (int) yy * bei, startx
+									+ (int) xx * bei + bw, starty + (int) yy
+									* bei + bh));
+
+							// c = holder.lockCanvas();
+							Paint p = new Paint(); // 创建画笔
+							p.setColor(Color.RED);
+							// 下面这段是保证双缓冲能都画上东西，从而不会闪烁
+
+							c.drawBitmap(bitmap, startx + xx * bei, starty + yy
+									* bei, p);
+
+							old_num = num;
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							if (c != null && !isallstop)
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+					}
+				}
+			}
+
+		}
+
+	}
+	
+	
+	
 	// 花 type 1为花，2为爱心
 	/**
 	 * 开始x,开始Y坐标，字的宽，高，文件名字，放大倍数，type为图片种类
@@ -184,8 +288,8 @@ public class FirstSurfaceView extends SurfaceView implements
 			int bei = beishu;
 			int dis = 25;
 			int old_num = -1;
-			for (int j = 0; j < height && isrun; j++) {
-				for (int i = 0; i <= weith && isrun; i++) {
+			for (int j = 0; j < height && !isallstop; j++) {
+				for (int i = 0; i <= weith && !isallstop; i++) {
 					//一定要sleep，要不然其他线程画不了东西
 					Thread.sleep(25);
 					Random rm = new Random();
@@ -199,7 +303,9 @@ public class FirstSurfaceView extends SurfaceView implements
 						bitmap = bitmapcache.getBitmap(R.drawable.love,
 								mContext);
 					}
-					if (i >= weith) {
+					int bw = bitmap.getWidth();
+					int bh = bitmap.getHeight();
+					if (i >= weith  && !isallstop) {
 						//嘿嘿，好像这段sy可以不要，懒得去验证啦，加了没多大坏处啦
 						synchronized (holder) {
 							Canvas c = null;
@@ -233,7 +339,8 @@ public class FirstSurfaceView extends SurfaceView implements
 							} catch (Exception e) {
 								e.printStackTrace();
 							} finally {
-								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								if(c!=null)
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
 							}
 							continue;
 						}
@@ -246,7 +353,7 @@ public class FirstSurfaceView extends SurfaceView implements
 							float yy = (float) j;
 							//不要轻易去锁定整个屏幕
 							c = holder.lockCanvas(new Rect(startx + (int) xx
-									* bei - dis, starty + (int) yy * bei - dis,
+									* bei, starty + (int) yy * bei,
 									startx + (int) xx * bei + dis, starty
 											+ (int) yy * bei + dis));
 
@@ -254,7 +361,7 @@ public class FirstSurfaceView extends SurfaceView implements
 							Paint p = new Paint(); // 创建画笔
 							p.setColor(Color.RED);
 							//下面这段是保证双缓冲能都画上东西，从而不会闪烁
-							if (i > 0) {
+							if (i > 0 && !isallstop) {
 								int xx_b = i - 1;
 								int yy_b = j;
 								if (arr[xx_b][yy_b]) {
@@ -274,7 +381,7 @@ public class FirstSurfaceView extends SurfaceView implements
 									}
 								}
 							}
-							if (arr[i][j]) {
+							if (arr[i][j] && !isallstop) {
 								c.drawBitmap(bitmap, startx + xx * bei, starty
 										+ yy * bei, p);
 							}
@@ -282,10 +389,11 @@ public class FirstSurfaceView extends SurfaceView implements
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
+							if(c!=null )
 							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
 						}
 					}
-					System.out.print("@");// 替换成你喜欢的图案
+					//System.out.print("@");// 替换成你喜欢的图案
 					// } else {
 					// }
 				}
@@ -312,14 +420,43 @@ public class FirstSurfaceView extends SurfaceView implements
 
 		@Override
 		public void run() {
-			for (int i = 0; i <= 9; i++) {
+			for (int i = 0; i <= 10&& !isallstop; i++) {
 				//当i等于9时画左下角的蝴蝶，其他时候画星星
-				if (i == 9) {
-					Bitmap b = bitmapcache
+				if (i >= 9&& !isallstop) {
+					Bitmap b = null;
+					int b_w;
+					int b_h ;
+					int x_start;
+					int x_end;
+					int y_start;
+					int y_end;
+					Rect rt;
+					if(i == 9 && !isallstop){
+						b = bitmapcache
 							.getBitmap(R.drawable.hudei, mContext);
-					for (int j = 1; j < 11; j++) {
+						
+						b_w = b.getWidth();
+						b_h = b.getHeight();
+						x_start = 3 * this.sw / 4-25;
+						x_end = x_start + b_w;
+						y_start = 2 * this.sh/4+100;
+						y_end = y_start + b_h;
+						rt = new Rect(x_start,y_start,x_end,y_end);
+					}
+					else{
+						b = bitmapcache.getBitmap(R.drawable.love_m_left, mContext);
+						b_w = b.getWidth();
+						b_h = b.getHeight();
+						x_start = 1 * this.sw / 4-85;
+						x_end = x_start + b_w;
+						y_start = 2 * this.sh/4+110;
+						y_end = y_start + b_h;
+						rt = new Rect(x_start,y_start,x_end,y_end);
+					}
+						
+					for (int j = 1; j < 11 && !isallstop; j++) {
 						try {
-							Thread.sleep(50);
+							Thread.sleep(200);
 						} catch (InterruptedException e) {
 							// TODO 自动生成的 catch 块
 							e.printStackTrace();
@@ -328,19 +465,19 @@ public class FirstSurfaceView extends SurfaceView implements
 						synchronized (holder) {
 							Canvas c = null;
 							try {
+								
 								//锁右下边一部分
-								c = holder.lockCanvas(new Rect(new Rect(
-										3 * this.sw / 4, 3 * this.sh / 4,
-										this.sw, this.sh)));
+								c = holder.lockCanvas(rt);
 								Paint p = new Paint();
 								p.setAlpha(j * 10);  //透明度
-								c.drawBitmap(b, 3 * this.sw / 4,
-										3 * this.sh / 4, p);
+								
+								c.drawBitmap(b, x_start,y_start, p);
 							} catch (Exception e) {
 
 								e.printStackTrace();
 							} finally {
-								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								if(c!=null)
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
 							}
 						}// syn
 					}
@@ -348,12 +485,13 @@ public class FirstSurfaceView extends SurfaceView implements
 				}
 
 				//随机位置随机星星
-				Random rm = new Random();
-				int show_x = rm.nextInt(this.sw);
-				int show_y = rm.nextInt(this.sh);
+				Random rm = new Random();			
+				int show_x = (int) Math.round(Math.random()*(sw-50-50)+50);
+				int show_y = (int) Math.round(Math.random()*(sh-80-80)+80);
 				int xin = rm.nextInt(3);
-				Bitmap bit = bitmapcache.getBitmap(xin_all[xin], mContext);
-				for (int j = 1; j < 11; j++) {
+				
+					Bitmap bit = bitmapcache.getBitmap(xin_all[xin], mContext);
+				for (int j = 1; j < 11 && !isallstop; j++) {
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
@@ -373,6 +511,7 @@ public class FirstSurfaceView extends SurfaceView implements
 
 							e.printStackTrace();
 						} finally {
+							if(c!=null )
 							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
 						}
 					}// syn
@@ -408,8 +547,35 @@ public class FirstSurfaceView extends SurfaceView implements
 			holder.setKeepScreenOn(true);
 			// show_I(int stx,int sty,int w,int h,String filename,int beishu
 			// show_I(3,20,19,19,"array_zhang.txt",9,2);
-			show_I(3, 20, 20, 20, "array_chu.txt", 9, 2);
-			show_I(sw / 2 + 60, 20, 20, 20, "array_chu.txt", 9, 2);
+			String one = spxml.getConfigSharedPreferences("first_name_1", 
+					spxml.getResourceString(R.string.first_et_1));
+			if(one.equals("")) one = spxml.getResourceString(R.string.first_et_1);
+			String one1 = one.substring(0, 1);
+			//String one1 = one.charAt(0);
+			if(one1.equals("晚"))
+				show_I(3, 40, 20, 20, "array_wan.txt", 8, 2);
+			else if(one1.equals("楚"))
+				show_I(3, 40, 20, 20, "array_chu.txt", 8, 2);
+			else show_font32(one1, 3, 40, sw, sh, 5, 2);
+			//show_font32("楚", 3, 40, 20, 20, 5, 2);
+			
+			String two = spxml.getConfigSharedPreferences("first_name_2", 
+					spxml.getResourceString(R.string.first_et_2));
+			if(two.equals("")){
+				//two = spxml.getResourceString(R.string.first_et_1);
+				//只有一个字
+			}else{
+				String two1 = two.substring(0, 1);
+				if(two1.equals("晚"))
+					show_I(sw / 2 + 60, 40, 20, 20, "array_wan.txt", 8, 2);
+				else if(two1.equals("楚"))
+					show_I(sw / 2 + 60, 40, 20, 20, "array_chu.txt", 8, 2);
+				else if(two1.equals("玲"))
+					show_I(sw / 2 + 60, 40, 20, 20, "array_ling.txt", 8, 2);
+				else show_font32(two1, sw / 2 + 60, 40, sw, sh, 5, 2);
+			}
+			
+			//show_I(sw / 2 + 60, 40, 20, 20, "array_chu.txt", 8, 2);
 			// drawText("晚晚");
 			begin.countDown();
 		}// run
@@ -431,12 +597,44 @@ public class FirstSurfaceView extends SurfaceView implements
 		public void run() {
 			System.out.println("create1");
 			this.holder.setKeepScreenOn(true);
-			FirstSurfaceView.this.show_I(-50 + this.sw / 2, 15, 7, 9,
-					"array_I.txt", 20, 1);
+			FirstSurfaceView.this.show_I(-50 + this.sw / 2, 50, 7, 9,
+					"array_I.txt", 18, 1);
 			run_hua_heart();
-			FirstSurfaceView.this.show_I(-105 + this.sw / 2, 160 + this.sh / 2,
-					10, 10, "array_U.txt", 20, 1);
+			FirstSurfaceView.this.show_I(-94 + this.sw / 2, 150 + this.sh / 2,
+					10, 10, "array_U.txt", 18, 1);
+			run_M_M();
 			begin.countDown();
+		}
+		
+		private void run_M_M(){
+			int start_x = sw/2-100;
+			int start_y = sh/2-90;
+			Bitmap m_m = bitmapcache.getBitmap(R.drawable.h_m_m, mContext);
+			int pic_w = m_m.getWidth();
+			int pic_h = m_m.getHeight();
+			Rect r = new Rect(start_x,start_y,start_x+pic_w,start_y+pic_h);
+			Paint p = new Paint();
+			for(int i =1;i<51  && !isallstop;i++){
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+				p.setAlpha(i*2);
+				synchronized (holder) {
+					Canvas c = null;
+					try {
+						c = holder.lockCanvas(r);
+						c.drawBitmap(m_m, start_x,start_y, p);  //画中间的心							
+					}catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						if(c!=null )
+						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+					}					
+				}//sy
+			}
 		}
 
 		private void run_hua_heart() {
@@ -448,7 +646,7 @@ public class FirstSurfaceView extends SurfaceView implements
 			Random rm = new Random();
 			int old_num = -1;
 			float old_xx = 0, old_yy = 0;
-			for (int i = 0; i < maxh; i++) {
+			for (int i = 0; i < maxh  && !isallstop; i++) {
 				try {
 					Thread.sleep(80);
 				} catch (InterruptedException e1) {
@@ -493,6 +691,7 @@ public class FirstSurfaceView extends SurfaceView implements
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
+						if(c!=null  )
 						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
 					}
 				}
@@ -502,4 +701,321 @@ public class FirstSurfaceView extends SurfaceView implements
 
 	}
 
+	class ShowBianKuang extends Thread{
+		int resoureid,startx,starty,endx,endy,speed,type;
+		int middlex,middlexy;
+		int screen_w,screen_h;
+		int pic_w,pic_h;
+		Bitmap bit;
+		/**
+		 * type 1 顶部从左到右  
+		 * type 2 底部从右到左
+		 * type 3 左部中间
+		 * type 4 右部中间
+		 * @param biankuangid
+		 * @param screen_w
+		 * @param screen_h
+		 * @param type
+		 * @param speed
+		 */
+		public ShowBianKuang(int biankuangid,int screen_w,int screen_h,int type,int speed){
+			this.resoureid = biankuangid;
+			this.speed = speed;
+			bit = bitmapcache.getBitmap(resoureid, mContext);
+			pic_w = bit.getWidth();
+			pic_h = bit.getHeight();
+			this.type = type;
+			this.screen_h = screen_h;
+			this.screen_w = screen_w;
+			
+			
+		}
+		
+		public void run(){
+			if(type == 1){
+				startx = 0;
+				starty = 0;
+				endx = screen_w - pic_w;
+				endy = 0;
+				middlex = screen_w/2-pic_w/2;
+				showUPBK();
+			}else if(type == 2){
+				startx = screen_w;
+				starty = screen_h-pic_h-50;
+				endx = 0;
+				endy = screen_h;
+				middlex = screen_w/2-pic_w/2;
+				showDOWNBK();
+			}
+			else if(type == 3){
+				startx = -54;
+				starty = screen_h/2-120;
+				endx = startx+pic_w;
+				endy = starty+pic_h;
+				showMidd();
+			}else if(type == 4){
+				startx = screen_w-62;
+				starty = screen_h/2-120;
+				endx = startx+pic_w;
+				endy = starty+pic_h;
+				showMidd();
+			}
+			begin.countDown();
+		}
+		
+		
+		private void showMidd(){
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e1) {
+				// TODO 自动生成的 catch 块
+				e1.printStackTrace();
+			}
+			Rect rt = null;
+			rt = new Rect(startx,starty,endx,endy);
+			for(int i =1;i<100 && !isallstop;i++){
+				try {
+					Thread.sleep(400);
+				} catch (InterruptedException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+				Paint pa = new Paint(); // 创建画笔
+				pa.setAlpha(1*i);
+				synchronized (holder) {
+					Canvas c = null;
+					try {
+						c = holder.lockCanvas(rt);
+						c.drawBitmap(bit, startx,starty, pa);  //画中间的心							
+					}catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						if(c!=null )
+						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+					}					
+				}//sy
+			}
+		}
+		
+		public void showDOWNBK(){
+			Rect rt = null;
+			boolean isruning = true;
+			boolean isone = false;
+			while(isruning  && !isallstop){
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+				synchronized (holder) {
+					Canvas c = null;
+					try {
+						if(startx <= endx || isone) {
+							isone = true;
+							startx = startx +speed;
+						}else
+							startx = startx -speed;
+						
+						if(isone){
+							if(startx >= middlex) isruning = false;
+						}
+						
+						rt = new Rect(0,starty,screen_w,screen_h);
+						
+						c = holder.lockCanvas(rt);
+						Paint p = new Paint(); // 创建画笔
+						//c.drawColor(co);  //
+						c.drawColor(Color.TRANSPARENT,Mode.CLEAR);
+						c.drawBitmap(bit, startx, starty, p);
+					}catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						if(c!=null)
+						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+					}
+				}
+			
+			
+			}//while
+			
+			//出心
+			if(type == 2){	
+				//以下为画心的数据
+				Bitmap love_middle_down = bitmapcache.getBitmap(R.drawable.love_middle_down, mContext);
+				int love_md_w = love_middle_down.getWidth();
+				int love_md_h = love_middle_down.getHeight();
+				int x = middlex+pic_w/2-love_md_w/2+2;
+				int y = starty + 38;
+				Rect love_middle_down_rt = new Rect(x-50,y,x+love_md_w+50,y+love_md_h);
+				
+				//修正的endy
+				int endy_m = endy-50;
+				//以下为画下部左边框的数据
+				Bitmap love_down_left = bitmapcache.getBitmap(R.drawable.down_left, mContext);
+				int love_dl_w = love_down_left.getWidth();
+				int love_dl_h = love_down_left.getHeight();
+				int dl_x = 0;
+				int dl_y = endy_m-love_dl_h;
+				Rect love_down_left_rt = new Rect(0,endy_m-love_dl_h,love_dl_w,endy);
+				
+				//右边
+				Bitmap love_down_right = bitmapcache.getBitmap(R.drawable.down_right, mContext);
+				int love_dr_w = love_down_right.getWidth();
+				int love_dr_h = love_down_right.getHeight();
+				int dr_x = screen_w-love_dr_w-3;
+				int dr_y = endy_m-love_dr_h;
+				Rect love_down_right_rt = new Rect(dr_x,endy_m-love_dr_h,dr_x+love_dr_w,endy);
+				
+				for(int i =1;i<21  && !isallstop;i++){
+					try {
+						Thread.sleep(350);
+					} catch (InterruptedException e) {
+						// TODO 自动生成的 catch 块
+						e.printStackTrace();
+					}
+					Paint p = new Paint(); // 创建画笔
+					p.setAlpha(5*i);
+					synchronized (holder) {
+						Canvas c = null;
+						try {
+							c = holder.lockCanvas(love_middle_down_rt);
+							c.drawBitmap(love_middle_down, x,y, p);  //画中间的心							
+						}catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+						try {
+							c = holder.lockCanvas(love_down_left_rt);
+							c.drawBitmap(love_down_left, dl_x, dl_y, p);  //画左边					
+						}catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							if(c!=null )
+							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+						try {
+							c = holder.lockCanvas(love_down_right_rt);							
+							c.drawBitmap(love_down_right,dr_x,dr_y,p);  //画右边
+						}catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							if(c!=null )
+							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+					}//sy
+				}//for	
+			}//if
+			
+		}
+		
+		public void showUPBK(){
+			Rect rt = null;
+			boolean isruning = true;
+			boolean isone = false;
+			while(isruning && !isallstop){
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+				synchronized (holder) {
+					Canvas c = null;
+					try {
+						if(startx >= endx || isone) {
+							isone = true;
+							startx = startx -speed;
+						}else
+							startx = startx +speed;
+						
+						if(isone){
+							if(startx <= middlex) isruning = false;
+						}
+						if(type==1){
+							rt = new Rect(startx-25,starty,startx+pic_w+5,pic_h);
+						}
+						c = holder.lockCanvas(rt);
+						Paint p = new Paint(); // 创建画笔
+						//c.drawColor(co);  //
+						c.drawColor(Color.TRANSPARENT,Mode.CLEAR);
+						c.drawBitmap(bit, startx, starty, p);
+					}catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						if(c!=null )
+						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+					}
+				}
+			
+			
+			}//while
+			
+			//出心
+			if(type == 1){	
+				//以下为画心的数据
+				Bitmap love_middle_up = bitmapcache.getBitmap(R.drawable.love_middle_up, mContext);
+				int love_mu_w = love_middle_up.getWidth();
+				int love_mu_h = love_middle_up.getHeight();
+				int x = middlex+pic_w/2-love_mu_w/2;
+				Rect love_middle_up_rt = new Rect(x-50,0,x+love_mu_w+50,love_mu_h);
+				
+				//以下为画上部左边框的数据
+				Bitmap love_up_left = bitmapcache.getBitmap(R.drawable.up_left, mContext);
+				int love_ul_w = love_up_left.getWidth();
+				int love_ul_h = love_up_left.getHeight();
+				Rect love_up_left_rt = new Rect(0,0,love_ul_w,love_ul_h);
+				
+				//右边
+				Bitmap love_up_right = bitmapcache.getBitmap(R.drawable.up_right, mContext);
+				int love_up_w = love_up_right.getWidth();
+				int love_up_h = love_up_right.getHeight();
+				int ur_x = screen_w-love_ul_w-10;
+				Rect love_up_right_rt = new Rect(ur_x,0,ur_x+love_up_w,love_up_h);
+				
+				for(int i =1;i<31 && !isallstop;i++){
+					try {
+						Thread.sleep(350);
+					} catch (InterruptedException e) {
+						// TODO 自动生成的 catch 块
+						e.printStackTrace();
+					}
+					Paint p = new Paint(); // 创建画笔
+					p.setAlpha(33*i);
+					synchronized (holder) {
+						Canvas c = null;
+						try {
+							c = holder.lockCanvas(love_middle_up_rt);
+							c.drawBitmap(love_middle_up, x,0, p);  //画中间的心							
+						}catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							if(c!=null )
+							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+						try {
+							c = holder.lockCanvas(love_up_left_rt);
+							c.drawBitmap(love_up_left, 0,0, p);  //画左边					
+						}catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							if(c!=null )
+							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+						try {
+							c = holder.lockCanvas(love_up_right_rt);							
+							c.drawBitmap(love_up_right,ur_x,0,p);  //画右边
+						}catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							if(c!=null )
+							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+					}//sy
+				}//for	
+			}//if
+		}
+		
+	}
 }

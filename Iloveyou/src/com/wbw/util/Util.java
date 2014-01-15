@@ -28,6 +28,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListAdapter;
@@ -51,6 +53,14 @@ public class Util {
 
 	private Util() {
 
+	}
+	
+	private Context context = null;
+	public void setContext(Context c){
+		this.context = c;
+	}
+	public Context getContext(){
+		return context;
 	}
 
 	/**
@@ -561,5 +571,17 @@ public class Util {
 			String paramString) throws IOException {
 		return paramContext.getResources().getAssets().open(paramString);
 	}
+	
+	//以省内存的方式读取图片
+		public Bitmap getBitmap(InputStream is){
+			   BitmapFactory.Options opt = new BitmapFactory.Options();   
+		        opt.inPreferredConfig = Bitmap.Config.RGB_565;    
+		       opt.inPurgeable = true;   
+		       opt.inInputShareable = true; 
+		       opt.inSampleSize = 4;
+		          //获取资源图片   
+		       //InputStream is = mContext.getResources().openRawResource(resId);   
+		           return BitmapFactory.decodeStream(is,null,opt);   
+		}
 
 }

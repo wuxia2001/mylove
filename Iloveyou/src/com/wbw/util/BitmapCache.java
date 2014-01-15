@@ -11,6 +11,7 @@ import java.util.Iterator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 
 
@@ -141,6 +142,37 @@ public class BitmapCache {
 	    bit = new BitmapFactory().decodeResource(context.getResources(), resid,op);
 	    return bit;
 	}
+	
+	 /**
+	    * 资源ID,需要的长和宽，n为比例
+	    * @param resid
+	    * @param context
+	    * @param n 
+	    * @return
+	    */
+		public static Bitmap getBitmapByLM(int resid ,Context context,int n){
+			BitmapFactory.Options op = new BitmapFactory.Options();
+			op.inJustDecodeBounds = false;
+			Bitmap bit = BitmapFactory.decodeResource(context.getResources(), resid);
+			//Bitmap bit = new BitmapFactory().decodeFile(path, op);
+			if(bit == null){
+				
+				return null;
+			}
+			int scale = n;
+			if(scale < 1) scale = 1;
+			
+			
+			op.inPreferredConfig = Bitmap.Config.RGB_565;    
+		    op.inPurgeable = true;   
+		    op.inInputShareable = true; 
+		    op.inSampleSize = scale;
+		    
+		   // bit = new BitmapFactory().decodeFile(path,op);
+		    bit = new BitmapFactory().decodeResource(context.getResources(), resid,op);
+		    return bit;
+		}
+	
     
 //    public Bitmap getBitmap(String key,String path,String filename,int kind){
 //    	Bitmap bmp = null;

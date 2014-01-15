@@ -13,81 +13,84 @@ public final class R {
         public static final int slide_left_out=0x7f040001;
         public static final int slide_right_in=0x7f040002;
         public static final int slide_right_out=0x7f040003;
+        public static final int zoom_enter=0x7f040004;
+        public static final int zoom_exit=0x7f040005;
     }
     public static final class attr {
     }
     public static final class color {
         /**  粉蓝色 
          */
-        public static final int aqua=0x7f050015;
-        public static final int black=0x7f050003;
+        public static final int aqua=0x7f060015;
+        public static final int black=0x7f060003;
         /**  花白色 
          */
-        public static final int blanchedalmond=0x7f05000d;
-        public static final int blue=0x7f050004;
+        public static final int blanchedalmond=0x7f06000d;
+        public static final int blue=0x7f060004;
         /**  深天蓝色 
          */
-        public static final int blueblue=0x7f05001c;
-        public static final int bule=0x7f050000;
+        public static final int blueblue=0x7f06001c;
+        public static final int bule=0x7f060000;
         /**  浅绿色 
          */
-        public static final int cyan=0x7f050016;
+        public static final int cyan=0x7f060016;
         /**  中春绿色 
          */
-        public static final int darkturquoise=0x7f05001a;
-        public static final int deeppink=0x7f05000a;
+        public static final int darkturquoise=0x7f06001a;
+        public static final int deeppink=0x7f06000a;
         /**  暗宝石绿 
          */
-        public static final int deepskyblue=0x7f05001b;
+        public static final int deepskyblue=0x7f06001b;
         /**  雪白色 
          */
-        public static final int floralwhite=0x7f05000c;
+        public static final int floralwhite=0x7f06000c;
         /**  桃色 
          */
-        public static final int gold=0x7f050010;
-        public static final int green=0x7f050008;
-        public static final int grey=0x7f050002;
+        public static final int gold=0x7f060010;
+        public static final int green=0x7f060008;
+        public static final int grey=0x7f060002;
         /**  粉红色 
          */
-        public static final int honeydew=0x7f050012;
-        public static final int lblue=0x7f050009;
+        public static final int honeydew=0x7f060012;
+        public static final int huang=0x7f06001d;
+        public static final int lblue=0x7f060009;
         /**  春绿色 
          */
-        public static final int lime=0x7f050018;
-        public static final int littleblack=0x7f050006;
+        public static final int lime=0x7f060018;
+        public static final int littleblack=0x7f060006;
         /**  蜜色 
          */
-        public static final int mediumorchid=0x7f050013;
+        public static final int mediumorchid=0x7f060013;
         /**  酸橙色 
          */
-        public static final int mediumspringgreen=0x7f050019;
+        public static final int mediumspringgreen=0x7f060019;
         /**  白杏色 
          */
-        public static final int mistyrose=0x7f05000e;
+        public static final int mistyrose=0x7f06000e;
         /**  浅玫瑰色 
          */
-        public static final int peachpuff=0x7f05000f;
+        public static final int peachpuff=0x7f06000f;
         /**  金色 
          */
-        public static final int pink=0x7f050011;
+        public static final int pink=0x7f060011;
         /**  中粉紫色 
          */
-        public static final int powderblue=0x7f050014;
-        public static final int red=0x7f050005;
+        public static final int powderblue=0x7f060014;
+        public static final int red=0x7f060005;
         /**  深粉红色 
          */
-        public static final int snow=0x7f05000b;
+        public static final int snow=0x7f06000b;
         /**  青色 
          */
-        public static final int springgreen=0x7f050017;
-        public static final int wblue=0x7f050007;
-        public static final int white=0x7f050001;
+        public static final int springgreen=0x7f060017;
+        public static final int wblue=0x7f060007;
+        public static final int white=0x7f060001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static final int activity_horizontal_margin=0x7f070000;
+        public static final int activity_vertical_margin=0x7f070001;
     }
     public static final class drawable {
         public static final int a1=0x7f020000;
@@ -109,31 +112,160 @@ public final class R {
         public static final int a7=0x7f020010;
         public static final int a8=0x7f020011;
         public static final int a9=0x7f020012;
-        public static final int bg_second=0x7f020013;
-        public static final int hua=0x7f020014;
-        public static final int hudei=0x7f020015;
-        public static final int ic_launcher=0x7f020016;
-        public static final int ll=0x7f020017;
-        public static final int love=0x7f020018;
-        public static final int xin1=0x7f020019;
-        public static final int xin2=0x7f02001a;
-        public static final int xin3=0x7f02001b;
-        public static final int xin4=0x7f02001c;
+        public static final int allbackground=0x7f020013;
+        public static final int beau1=0x7f020014;
+        public static final int bg_second=0x7f020015;
+        public static final int big1=0x7f020016;
+        public static final int big15=0x7f020017;
+        public static final int big99=0x7f020018;
+        public static final int big_h=0x7f020019;
+        public static final int bottom=0x7f02001a;
+        public static final int btn_pressed=0x7f02001b;
+        public static final int btn_unpressed=0x7f02001c;
+        public static final int button=0x7f02001d;
+        public static final int button_normal=0x7f02001e;
+        public static final int button_pressed=0x7f02001f;
+        public static final int cancel_normal=0x7f020020;
+        public static final int cancel_pressed=0x7f020021;
+        public static final int cancle=0x7f020022;
+        public static final int common_toolbar_bg=0x7f020023;
+        public static final int divide=0x7f020024;
+        public static final int down1=0x7f020025;
+        public static final int down2=0x7f020026;
+        public static final int down_left=0x7f020027;
+        public static final int down_right=0x7f020028;
+        public static final int downmidd=0x7f020029;
+        public static final int frame=0x7f02002a;
+        public static final int h_m_m=0x7f02002b;
+        public static final int hua=0x7f02002c;
+        public static final int hudei=0x7f02002d;
+        public static final int ic_=0x7f02002e;
+        public static final int iloveyou_l=0x7f02002f;
+        public static final int itembackground=0x7f020030;
+        public static final int left1=0x7f020031;
+        public static final int left3=0x7f020032;
+        public static final int left66=0x7f020033;
+        public static final int leftd=0x7f020034;
+        public static final int ll=0x7f020035;
+        public static final int love=0x7f020036;
+        public static final int love_m_left=0x7f020037;
+        public static final int love_middle_down=0x7f020038;
+        public static final int love_middle_up=0x7f020039;
+        public static final int mask=0x7f02003a;
+        public static final int midd_midd_left=0x7f02003b;
+        public static final int midd_midd_right=0x7f02003c;
+        public static final int new_iv=0x7f02003d;
+        public static final int ok=0x7f02003e;
+        public static final int ok_normal=0x7f02003f;
+        public static final int ok_pressed=0x7f020040;
+        public static final int q1=0x7f020041;
+        public static final int q2=0x7f020042;
+        public static final int q3=0x7f020043;
+        public static final int q4=0x7f020044;
+        public static final int q5=0x7f020045;
+        public static final int q6=0x7f020046;
+        public static final int qq=0x7f020047;
+        public static final int right1=0x7f020048;
+        public static final int right2=0x7f020049;
+        public static final int right3=0x7f02004a;
+        public static final int right4=0x7f02004b;
+        public static final int right5=0x7f02004c;
+        public static final int right6=0x7f02004d;
+        public static final int right7=0x7f02004e;
+        public static final int right9=0x7f02004f;
+        public static final int rightdown1=0x7f020050;
+        public static final int stick=0x7f020051;
+        public static final int title=0x7f020052;
+        public static final int ulr1=0x7f020053;
+        public static final int up0=0x7f020054;
+        public static final int up1=0x7f020055;
+        public static final int up2=0x7f020056;
+        public static final int up3=0x7f020057;
+        public static final int up_left=0x7f020058;
+        public static final int up_right=0x7f020059;
+        public static final int upmidd=0x7f02005a;
+        public static final int xin1=0x7f02005b;
+        public static final int xin2=0x7f02005c;
+        public static final int xin3=0x7f02005d;
+        public static final int xin4=0x7f02005e;
+        public static final int xxing=0x7f02005f;
     }
     public static final class id {
-        public static final int f1=0x7f090001;
-        public static final int f2=0x7f090003;
-        public static final int l1=0x7f090000;
-        public static final int l2=0x7f090002;
+        public static final int cancle=0x7f0a0001;
+        public static final int config_ll=0x7f0a0000;
+        public static final int downapk_tv=0x7f0a0003;
+        public static final int f1=0x7f0a0025;
+        public static final int f2=0x7f0a0027;
+        public static final int f3=0x7f0a0029;
+        public static final int first_back_bt=0x7f0a000c;
+        public static final int first_back_tv=0x7f0a0006;
+        public static final int first_et_1=0x7f0a000a;
+        public static final int first_et_2=0x7f0a000b;
+        public static final int first_music_bt=0x7f0a000e;
+        public static final int first_music_tv=0x7f0a000d;
+        public static final int first_t1=0x7f0a0008;
+        public static final int first_t2=0x7f0a0009;
+        public static final int isnew=0x7f0a0004;
+        public static final int l1=0x7f0a0024;
+        public static final int l2=0x7f0a0026;
+        public static final int l3=0x7f0a0028;
+        public static final int music_on_off=0x7f0a0007;
+        public static final int ok=0x7f0a0002;
+        public static final int reset_bt=0x7f0a0005;
+        public static final int second_back_bt=0x7f0a0015;
+        public static final int second_back_tv=0x7f0a0014;
+        public static final int second_enter_bt=0x7f0a0010;
+        public static final int second_et=0x7f0a0011;
+        public static final int second_text_color=0x7f0a0012;
+        public static final int second_textcolor_bt=0x7f0a0013;
+        public static final int second_tv=0x7f0a000f;
+        public static final int thrid_back_bt=0x7f0a0021;
+        public static final int thrid_back_tv=0x7f0a0020;
+        public static final int thrid_f_et_1=0x7f0a0018;
+        public static final int thrid_f_et_2=0x7f0a0019;
+        public static final int thrid_music_bt=0x7f0a0023;
+        public static final int thrid_music_tv=0x7f0a0022;
+        public static final int thrid_s_et_1=0x7f0a001c;
+        public static final int thrid_s_et_2=0x7f0a001d;
+        public static final int thrid_s_et_3=0x7f0a001e;
+        public static final int thrid_s_et_4=0x7f0a001f;
+        public static final int thrid_t1=0x7f0a0016;
+        public static final int thrid_t2=0x7f0a0017;
+        public static final int thrid_t3=0x7f0a001a;
+        public static final int thrid_t4=0x7f0a001b;
     }
     public static final class layout {
-        public static final int firstview=0x7f030000;
-        public static final int secondview=0x7f030001;
+        public static final int config=0x7f030000;
+        public static final int firstview=0x7f030001;
+        public static final int secondview=0x7f030002;
+        public static final int thridview=0x7f030003;
+    }
+    public static final class raw {
+        public static final int blow=0x7f050000;
+        public static final int heartv=0x7f050001;
+        public static final int thrid=0x7f050002;
     }
     public static final class string {
-        public static final int action_settings=0x7f070001;
-        public static final int app_name=0x7f070000;
-        public static final int hello_world=0x7f070002;
+        public static final int action_settings=0x7f080001;
+        public static final int app_name=0x7f080000;
+        public static final int btn_color_picker=0x7f080006;
+        public static final int cancle=0x7f080008;
+        public static final int configbackpic=0x7f08000a;
+        public static final int dialog_message=0x7f080004;
+        public static final int dialog_title=0x7f080003;
+        public static final int first_et_1=0x7f08000b;
+        public static final int first_et_2=0x7f08000c;
+        public static final int firstrun=0x7f080009;
+        public static final int hello_world=0x7f080002;
+        public static final int ok=0x7f080007;
+        public static final int reset_message=0x7f080005;
+        public static final int second_words=0x7f08000d;
+        public static final int thrid_f_et_1=0x7f08000e;
+        public static final int thrid_f_et_2=0x7f08000f;
+        public static final int thrid_s_et_1=0x7f080010;
+        public static final int thrid_s_et_2=0x7f080011;
+        public static final int thrid_s_et_3=0x7f080012;
+        public static final int thrid_s_et_4=0x7f080013;
     }
     public static final class style {
         /** 
@@ -146,10 +278,10 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static final int AppBaseTheme=0x7f090000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static final int AppTheme=0x7f090001;
     }
 }
