@@ -114,11 +114,18 @@ public class SecondSurfaceView extends SurfaceView implements
 	
 	//2
 	public void showW(){
+		size = 24;  //字体大小
+		if(w>=540) size = 25;
+		if(w>=640) size = 26;
+		if(w>=800) size = 29;
+		if(w>=1000) size = 31;
+		if(w>=1200) size = 33;
+		
 		String se = spxml.getResourceString(R.string.second_words);
 		String t = 
 				spxml.getConfigSharedPreferences("second_words", se); 
 		if(t.equals("")) t = se;
-		st = new ShowText(t, 50, 100, 100);
+		st = new ShowText(t, 70, 110, 100);
 		st.start();
 	}
 	
@@ -190,8 +197,13 @@ public class SecondSurfaceView extends SurfaceView implements
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null)
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 
 				}
@@ -208,7 +220,7 @@ public class SecondSurfaceView extends SurfaceView implements
 		}
 	}
 	
-	
+	private int size;
 	private class ShowText extends Thread{
 		int startx,starty;
 		String text;
@@ -237,7 +249,7 @@ public class SecondSurfaceView extends SurfaceView implements
 		            	p.setColor(C);
 		            	
 		            }
-	             int size = 25;  //字体大小
+	             //int size = 24;  //字体大小
 	             p.setTextSize(size);
 	             Xfermode xFermode = new PorterDuffXfermode(Mode.SRC_OVER);
 	             p.setXfermode(xFermode);
@@ -257,13 +269,20 @@ public class SecondSurfaceView extends SurfaceView implements
 		     					c = holder.lockCanvas(new Rect(0, starty-size*(i+1)+10*i,
 		     							w, starty+size*(i+1)+10*i));
 		     					c.drawColor(Color.TRANSPARENT, android.graphics.PorterDuff.Mode.OVERLAY);  
-		     					 String tm = allt[i].substring(0,count-1);		                       
+		     					String tm_old = allt[i].substring(0,count-1);
+		     					String tm = allt[i].substring(0,count);	
+		     					c.drawText(tm_old, startx,starty+size*i+10*i, p);
 		    	                 c.drawText(tm, startx,starty+size*i+10*i, p);
 		     				} catch (Exception e) {
 		     					e.printStackTrace();
 		     				} finally {
-		     					if(c!=null)
-		     					holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+		     					try{
+									if (c != null){
+										holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+									}
+								}catch(Exception e){
+									e.printStackTrace();
+								}
 		     				}
 	
 		     			}
@@ -273,13 +292,20 @@ public class SecondSurfaceView extends SurfaceView implements
 			     					c = holder.lockCanvas(new Rect(0, starty-size*(i+1)+10*i,
 			     							w, starty+size*(i+1)+10*i));
 			     					c.drawColor(Color.TRANSPARENT, android.graphics.PorterDuff.Mode.OVERLAY);  
-			     					 String tm = allt[i].substring(0,count);		                       
+			     					String tm_old = allt[i].substring(0,count-1);
+			     					String tm = allt[i].substring(0,count);	
+			     					c.drawText(tm_old, startx,starty+size*i+10*i, p);		                       
 			    	                 c.drawText(tm, startx,starty+size*i+10*i, p);
 			     				} catch (Exception e) {
 			     					e.printStackTrace();
 			     				} finally {
-			     					if(c!=null)
-			     					holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+			     					try{
+										if (c != null){
+											holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+										}
+									}catch(Exception e){
+										e.printStackTrace();
+									}
 			     				}
 		
 			     			}
@@ -380,8 +406,13 @@ public class SecondSurfaceView extends SurfaceView implements
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 						}
 				}
@@ -540,8 +571,13 @@ public class SecondSurfaceView extends SurfaceView implements
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null )
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 				}			
 				
@@ -617,8 +653,13 @@ public class SecondSurfaceView extends SurfaceView implements
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null)
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 				}			
 				
@@ -679,8 +720,13 @@ public class SecondSurfaceView extends SurfaceView implements
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null)
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 				}	
 				num++;

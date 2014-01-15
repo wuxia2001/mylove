@@ -20,6 +20,8 @@ public class MediaPlay {
 	public void InitMediaPlay(Context context , int resource){
 		mediaPlayer01 = MediaPlayer.create(context, resource);
 		mediaPlayer01.setLooping(false);
+		//mediaPlayer01.setOnCompletionListener();
+		//mediaPlayer01.
 	}
 	
 	public void InitMediaPlay(Context context ,String fpath){

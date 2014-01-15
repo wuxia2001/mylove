@@ -30,6 +30,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class SecondActivity extends Activity {
 
@@ -159,6 +160,7 @@ public class SecondActivity extends Activity {
 		public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO 自动生成的方法存根
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
+				
 				if(isconfig){
 					ssv.setRun(true);
 					Intent t = new Intent();
@@ -173,6 +175,7 @@ public class SecondActivity extends Activity {
 					new CloseAction(SecondActivity.this,ssv);
 				return true;
 			} else if(keyCode == KeyEvent.KEYCODE_MENU){
+				
 				if(!isconfig){
 					isconfig = true;
 					handler.sendEmptyMessageDelayed(NOCONFIG, 2000);

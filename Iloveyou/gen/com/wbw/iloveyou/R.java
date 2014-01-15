@@ -191,59 +191,68 @@ public final class R {
         public static final int xxing=0x7f02005f;
     }
     public static final class id {
-        public static final int cancle=0x7f0a0001;
-        public static final int config_ll=0x7f0a0000;
-        public static final int downapk_tv=0x7f0a0003;
-        public static final int f1=0x7f0a0025;
-        public static final int f2=0x7f0a0027;
-        public static final int f3=0x7f0a0029;
-        public static final int first_back_bt=0x7f0a000c;
-        public static final int first_back_tv=0x7f0a0006;
-        public static final int first_et_1=0x7f0a000a;
-        public static final int first_et_2=0x7f0a000b;
-        public static final int first_music_bt=0x7f0a000e;
-        public static final int first_music_tv=0x7f0a000d;
-        public static final int first_t1=0x7f0a0008;
-        public static final int first_t2=0x7f0a0009;
-        public static final int isnew=0x7f0a0004;
-        public static final int l1=0x7f0a0024;
-        public static final int l2=0x7f0a0026;
-        public static final int l3=0x7f0a0028;
-        public static final int music_on_off=0x7f0a0007;
-        public static final int ok=0x7f0a0002;
-        public static final int reset_bt=0x7f0a0005;
-        public static final int second_back_bt=0x7f0a0015;
-        public static final int second_back_tv=0x7f0a0014;
-        public static final int second_enter_bt=0x7f0a0010;
-        public static final int second_et=0x7f0a0011;
-        public static final int second_text_color=0x7f0a0012;
-        public static final int second_textcolor_bt=0x7f0a0013;
-        public static final int second_tv=0x7f0a000f;
-        public static final int thrid_back_bt=0x7f0a0021;
-        public static final int thrid_back_tv=0x7f0a0020;
-        public static final int thrid_f_et_1=0x7f0a0018;
-        public static final int thrid_f_et_2=0x7f0a0019;
-        public static final int thrid_music_bt=0x7f0a0023;
-        public static final int thrid_music_tv=0x7f0a0022;
-        public static final int thrid_s_et_1=0x7f0a001c;
-        public static final int thrid_s_et_2=0x7f0a001d;
-        public static final int thrid_s_et_3=0x7f0a001e;
-        public static final int thrid_s_et_4=0x7f0a001f;
-        public static final int thrid_t1=0x7f0a0016;
-        public static final int thrid_t2=0x7f0a0017;
-        public static final int thrid_t3=0x7f0a001a;
-        public static final int thrid_t4=0x7f0a001b;
+        public static final int action_settings=0x7f0b002e;
+        public static final int cancle=0x7f0b0004;
+        public static final int config_ll=0x7f0b0003;
+        public static final int current_version=0x7f0b0000;
+        public static final int downapk_tv=0x7f0b0006;
+        public static final int f1=0x7f0b0029;
+        public static final int f2=0x7f0b002b;
+        public static final int f3=0x7f0b002d;
+        public static final int first_back_bt=0x7f0b0010;
+        public static final int first_back_tv=0x7f0b000a;
+        public static final int first_et_1=0x7f0b000e;
+        public static final int first_et_2=0x7f0b000f;
+        public static final int first_music_bt=0x7f0b0012;
+        public static final int first_music_tv=0x7f0b0011;
+        public static final int first_t1=0x7f0b000c;
+        public static final int first_t2=0x7f0b000d;
+        public static final int isnew=0x7f0b0007;
+        public static final int l1=0x7f0b0028;
+        public static final int l2=0x7f0b002a;
+        public static final int l3=0x7f0b002c;
+        public static final int music_on_off=0x7f0b000b;
+        public static final int ok=0x7f0b0005;
+        public static final int pro=0x7f0b0001;
+        public static final int reset_bt=0x7f0b0008;
+        public static final int second_back_bt=0x7f0b0019;
+        public static final int second_back_tv=0x7f0b0018;
+        public static final int second_enter_bt=0x7f0b0014;
+        public static final int second_et=0x7f0b0015;
+        public static final int second_text_color=0x7f0b0016;
+        public static final int second_textcolor_bt=0x7f0b0017;
+        public static final int second_tv=0x7f0b0013;
+        public static final int text=0x7f0b0002;
+        public static final int thrid_back_bt=0x7f0b0025;
+        public static final int thrid_back_tv=0x7f0b0024;
+        public static final int thrid_f_et_1=0x7f0b001c;
+        public static final int thrid_f_et_2=0x7f0b001d;
+        public static final int thrid_music_bt=0x7f0b0027;
+        public static final int thrid_music_tv=0x7f0b0026;
+        public static final int thrid_s_et_1=0x7f0b0020;
+        public static final int thrid_s_et_2=0x7f0b0021;
+        public static final int thrid_s_et_3=0x7f0b0022;
+        public static final int thrid_s_et_4=0x7f0b0023;
+        public static final int thrid_t1=0x7f0b001a;
+        public static final int thrid_t2=0x7f0b001b;
+        public static final int thrid_t3=0x7f0b001e;
+        public static final int thrid_t4=0x7f0b001f;
+        public static final int youmi_bt=0x7f0b0009;
     }
     public static final class layout {
-        public static final int config=0x7f030000;
-        public static final int firstview=0x7f030001;
-        public static final int secondview=0x7f030002;
-        public static final int thridview=0x7f030003;
+        public static final int con_downapk=0x7f030000;
+        public static final int config=0x7f030001;
+        public static final int firstview=0x7f030002;
+        public static final int secondview=0x7f030003;
+        public static final int thridview=0x7f030004;
+    }
+    public static final class menu {
+        public static final int main=0x7f0a0000;
     }
     public static final class raw {
-        public static final int blow=0x7f050000;
-        public static final int heartv=0x7f050001;
-        public static final int thrid=0x7f050002;
+        public static final int heartv=0x7f050000;
+        public static final int thrid=0x7f050001;
+        public static final int thrid_nan=0x7f050002;
     }
     public static final class string {
         public static final int action_settings=0x7f080001;
@@ -260,12 +269,14 @@ public final class R {
         public static final int ok=0x7f080007;
         public static final int reset_message=0x7f080005;
         public static final int second_words=0x7f08000d;
+        public static final int sugg=0x7f080014;
         public static final int thrid_f_et_1=0x7f08000e;
         public static final int thrid_f_et_2=0x7f08000f;
         public static final int thrid_s_et_1=0x7f080010;
         public static final int thrid_s_et_2=0x7f080011;
         public static final int thrid_s_et_3=0x7f080012;
         public static final int thrid_s_et_4=0x7f080013;
+        public static final int tishi=0x7f080015;
     }
     public static final class style {
         /** 
@@ -283,5 +294,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
+        public static final int normal_text=0x7f090002;
     }
 }

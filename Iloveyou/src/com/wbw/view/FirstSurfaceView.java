@@ -9,6 +9,8 @@ import java.util.concurrent.CountDownLatch;
 import com.wbw.iloveyou.R;
 import com.wbw.inter.AllSurfaceView;
 import com.wbw.util.BitmapCache;
+import com.wbw.util.Font16;
+import com.wbw.util.Font24;
 import com.wbw.util.Font32;
 import com.wbw.util.SharedPreferencesXml;
 import com.wbw.util.Util;
@@ -67,6 +69,7 @@ public class FirstSurfaceView extends SurfaceView implements
 		holder.setFormat(PixelFormat.TRANSPARENT); 
 		goOn();
 		spxml = SharedPreferencesXml.init();
+		
 	}
 
 	private Thread goonthread ;
@@ -229,8 +232,114 @@ public class FirstSurfaceView extends SurfaceView implements
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if (c != null && !isallstop)
-								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+
+		}
+
+	}
+	
+	/**
+	 * 16/24/32,要写的字符，开始的x,y,倍数，花或爱心
+	 * @param font_kind
+	 * @param s
+	 * @param stx
+	 * @param sty
+	 * @param beishu
+	 * @param type
+	 */
+	public void show_font16_24_32(int font_kind,String s, int stx, int sty, 
+			int beishu, int type) {
+		boolean[][] arr = null;
+		int weith = 16;
+		int height = 16;
+		if(font_kind == 16){
+			weith = 16;
+			height = 16;
+			arr = new boolean[weith][height];
+			Font16 font16 = new Font16(mContext);
+			arr = font16.drawString(s);
+		}else if(font_kind == 24){
+			weith = 24;
+			height = 24;
+			arr = new boolean[weith][height];
+			Font24 font24 = new Font24(mContext);
+			arr = font24.drawString(s);
+		}else {
+			weith = 32;
+			height = 32;
+			arr = new boolean[weith][height];
+			Font32 font32 = new Font32(mContext);
+			arr = font32.drawString(s);
+		}
+				
+		int startx = stx, starty = sty;		
+		int bei = beishu;
+		int old_num = -1;
+		int lCount;// 控制列
+		for (int i = 0; i < weith && !isallstop; i++) {
+			for (int j = 0; j < height && !isallstop; j++) {
+				try {
+					Thread.sleep(25);
+				} catch (InterruptedException e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+				float xx = (float) j;
+				float yy = (float) i;
+				if (arr[i][j] && !isallstop) {
+
+					Random rm = new Random();
+					Bitmap bitmap = null;
+					int num = 0;
+					if (type == 1) {
+						num = rm.nextInt(heart_all.length - 1);
+						bitmap = bitmapcache
+								.getBitmap(heart_all[num], mContext);
+					} else if (type == 2) {
+						bitmap = bitmapcache.getBitmap(R.drawable.love,
+								mContext);
+					}
+					int bw = bitmap.getWidth();
+					int bh = bitmap.getHeight();
+					synchronized (holder) {
+						Canvas c = null;
+						try {
+
+							// 不要轻易去锁定整个屏幕
+							c = holder.lockCanvas(new Rect(startx + (int) xx
+									* bei, starty + (int) yy * bei, startx
+									+ (int) xx * bei + bw, starty + (int) yy
+									* bei + bh));
+
+							// c = holder.lockCanvas();
+							Paint p = new Paint(); // 创建画笔
+							p.setColor(Color.RED);
+							// 下面这段是保证双缓冲能都画上东西，从而不会闪烁
+
+							c.drawBitmap(bitmap, startx + xx * bei, starty + yy
+									* bei, p);
+
+							old_num = num;
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 					}
 				}
@@ -339,8 +448,13 @@ public class FirstSurfaceView extends SurfaceView implements
 							} catch (Exception e) {
 								e.printStackTrace();
 							} finally {
-								if(c!=null)
-									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								try{
+									if (c != null){
+										holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+									}
+								}catch(Exception e){
+									e.printStackTrace();
+								}
 							}
 							continue;
 						}
@@ -389,8 +503,13 @@ public class FirstSurfaceView extends SurfaceView implements
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 					}
 					//System.out.print("@");// 替换成你喜欢的图案
@@ -476,8 +595,13 @@ public class FirstSurfaceView extends SurfaceView implements
 
 								e.printStackTrace();
 							} finally {
-								if(c!=null)
-									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								try{
+									if (c != null){
+										holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+									}
+								}catch(Exception e){
+									e.printStackTrace();
+								}
 							}
 						}// syn
 					}
@@ -511,8 +635,13 @@ public class FirstSurfaceView extends SurfaceView implements
 
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 					}// syn
 				}
@@ -520,6 +649,8 @@ public class FirstSurfaceView extends SurfaceView implements
 			begin.countDown();
 		}
 	}
+	
+	int yadd_1200 = 100;
 
 	class showWenZi extends Thread {
 		public final int[] mask = { 128, 64, 32, 16, 8, 4, 2, 1 };
@@ -540,9 +671,48 @@ public class FirstSurfaceView extends SurfaceView implements
 			this.sh = h;
 			this.wenzi = wenzi;
 		}
+		
+		int onestartx,onestarty,twostartx,twostarty;
 
 		@Override
 		public void run() {
+			onestartx = 3;
+			onestarty = 40;
+			twostartx = sw / 2 + 60;
+			twostarty = 40;
+			
+			if(sw/2-60-30>160){
+				twostartx = twostartx+20;
+				onestartx = onestartx+5;
+			}
+			if(sw/2-60-50>160){
+				twostartx = twostartx+30;
+				onestartx = onestartx+10;
+			}
+			if(sw/2-60-70>160){
+				twostartx = twostartx+30;
+				onestartx = onestartx+10;
+			}
+			
+			int bei = 8;
+			int bei32 = 5;
+			//适配
+			if(sh >= 1200) {
+				onestarty = onestarty+yadd_1200;
+				twostarty = twostarty+yadd_1200;
+			}else if(sh>=1000 && sh<1200){
+				onestarty = onestarty+50;
+				twostarty = twostarty+50;
+			}
+			
+			if(sw >=600) {
+				bei = 9;
+				bei32= 7;
+			}
+			if(sw>=700){
+				bei32 = 8;
+			}
+					
 			System.out.println("create_wenzi");
 			holder.setKeepScreenOn(true);
 			// show_I(int stx,int sty,int w,int h,String filename,int beishu
@@ -553,10 +723,16 @@ public class FirstSurfaceView extends SurfaceView implements
 			String one1 = one.substring(0, 1);
 			//String one1 = one.charAt(0);
 			if(one1.equals("晚"))
-				show_I(3, 40, 20, 20, "array_wan.txt", 8, 2);
+				show_I(onestartx, onestarty, 20, 20, "array_wan.txt", bei, 2);
 			else if(one1.equals("楚"))
-				show_I(3, 40, 20, 20, "array_chu.txt", 8, 2);
-			else show_font32(one1, 3, 40, sw, sh, 5, 2);
+				show_I(onestartx, onestarty, 20, 20, "array_chu.txt", bei, 2);
+			else if(one1.equals("娟"))
+				show_I(onestartx, onestarty, 20, 20, "array_juang.txt", bei, 2);
+			else {
+				//show_font32(one1, onestartx, onestarty, sw, sh, bei32, 2);
+				int bei16 = 8;
+				show_font16(one1, onestartx, onestarty, sw, sh, bei16, 2);
+			}
 			//show_font32("楚", 3, 40, 20, 20, 5, 2);
 			
 			String two = spxml.getConfigSharedPreferences("first_name_2", 
@@ -567,12 +743,14 @@ public class FirstSurfaceView extends SurfaceView implements
 			}else{
 				String two1 = two.substring(0, 1);
 				if(two1.equals("晚"))
-					show_I(sw / 2 + 60, 40, 20, 20, "array_wan.txt", 8, 2);
+					show_I(twostartx,twostarty, 20, 20, "array_wan.txt", bei, 2);
 				else if(two1.equals("楚"))
-					show_I(sw / 2 + 60, 40, 20, 20, "array_chu.txt", 8, 2);
+					show_I(twostartx,twostarty, 20, 20, "array_chu.txt", bei, 2);
 				else if(two1.equals("玲"))
-					show_I(sw / 2 + 60, 40, 20, 20, "array_ling.txt", 8, 2);
-				else show_font32(two1, sw / 2 + 60, 40, sw, sh, 5, 2);
+					show_I(twostartx,twostarty, 20, 20, "array_ling.txt", bei, 2);
+				else if(two1.equals("娟"))
+					show_I(twostartx, twostarty, 20, 20, "array_juang.txt", bei, 2);
+				else show_font32(two1, twostartx,twostarty, sw, sh, bei32, 2);
 			}
 			
 			//show_I(sw / 2 + 60, 40, 20, 20, "array_chu.txt", 8, 2);
@@ -593,14 +771,37 @@ public class FirstSurfaceView extends SurfaceView implements
 			this.sw = sw;
 			this.sh = sh;
 		}
+		
+		int istartx,istarty,lovestartx,lovestarty,ustartx,ustarty;
+		
 
 		public void run() {
+			
+			//屏幕适配
+			istartx = -50 + sw / 2;
+			istarty = 50;
+			
+			
+			lovestartx = sw / 2 - 16;
+			lovestarty = sh / 2 - 68;
+			
+			ustartx = -94 + sw / 2;
+			ustarty = 150 + sh / 2;
+			
+			if(sh/2 >180+150+118+20) ustarty = 150 + sh / 2 +20;
+			if(sh/2 >180+150+118+40) ustarty = 150 + sh / 2 +40;
+			if(sh/2 >180+150+118+60) ustarty = 150 + sh / 2 +60;
+			if(sh >= 1200) {
+				istarty = istarty+yadd_1200;
+				ustarty = ustarty+yadd_1200;
+			}
+			
 			System.out.println("create1");
 			this.holder.setKeepScreenOn(true);
-			FirstSurfaceView.this.show_I(-50 + this.sw / 2, 50, 7, 9,
+			FirstSurfaceView.this.show_I(istartx,istarty, 7, 9,
 					"array_I.txt", 18, 1);
 			run_hua_heart();
-			FirstSurfaceView.this.show_I(-94 + this.sw / 2, 150 + this.sh / 2,
+			FirstSurfaceView.this.show_I(ustartx,ustarty,
 					10, 10, "array_U.txt", 18, 1);
 			run_M_M();
 			begin.countDown();
@@ -630,8 +831,13 @@ public class FirstSurfaceView extends SurfaceView implements
 					}catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null )
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}					
 				}//sy
 			}
@@ -691,8 +897,13 @@ public class FirstSurfaceView extends SurfaceView implements
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null  )
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -790,8 +1001,13 @@ public class FirstSurfaceView extends SurfaceView implements
 					}catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null )
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}					
 				}//sy
 			}
@@ -831,8 +1047,13 @@ public class FirstSurfaceView extends SurfaceView implements
 					}catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null)
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 				}
 			
@@ -892,8 +1113,13 @@ public class FirstSurfaceView extends SurfaceView implements
 						}catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 						try {
 							c = holder.lockCanvas(love_down_right_rt);							
@@ -901,8 +1127,13 @@ public class FirstSurfaceView extends SurfaceView implements
 						}catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 					}//sy
 				}//for	
@@ -944,8 +1175,13 @@ public class FirstSurfaceView extends SurfaceView implements
 					}catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null )
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 				}
 			
@@ -991,8 +1227,13 @@ public class FirstSurfaceView extends SurfaceView implements
 						}catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 						try {
 							c = holder.lockCanvas(love_up_left_rt);
@@ -1000,8 +1241,13 @@ public class FirstSurfaceView extends SurfaceView implements
 						}catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 						try {
 							c = holder.lockCanvas(love_up_right_rt);							
@@ -1009,8 +1255,13 @@ public class FirstSurfaceView extends SurfaceView implements
 						}catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 					}//sy
 				}//for	

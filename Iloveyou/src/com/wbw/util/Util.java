@@ -69,6 +69,7 @@ public class Util {
 	 * @return File
 	 */
 	public File creatFileIfNotExist(String path) {
+		System.out.println("cr");
 		File file = new File(path);
 		if (!file.exists()) {
 			try {

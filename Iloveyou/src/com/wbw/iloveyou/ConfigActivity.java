@@ -1,6 +1,23 @@
 package com.wbw.iloveyou;
 
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+
+import net.youmi.android.offers.OffersManager;
+import net.youmi.android.offers.PointsManager;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+
+import com.wbw.info.ApkVersionInfo;
+import com.wbw.info.VersionXml;
 import com.wbw.util.BitmapCache;
 import com.wbw.util.CloseAction;
 import com.wbw.util.HttpDownFile;
@@ -13,14 +30,22 @@ import com.wbw.view.SwitchButton;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -29,12 +54,14 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ConfigActivity extends Activity{
 	private SharedPreferencesXml spxml;
 	private Context mContext;
-	
+	private String base;
 	 @Override
 	  protected void onCreate(Bundle savedInstanceState) 
 	  {
@@ -44,6 +71,8 @@ public class ConfigActivity extends Activity{
 	    mContext = getApplicationContext();
 	    Util.init().setContext(mContext);
 	    spxml = SharedPreferencesXml.init();
+	    base  = Environment.getExternalStorageDirectory().getPath()+"/iloveyou";
+	    Util.init().creatDirIfNotExist(base+"/");
 	    MediaPlay.init().stop();
 	    findAllViews();
 	    setDefaultValues();
@@ -64,6 +93,7 @@ public class ConfigActivity extends Activity{
 	 private Button second_textcolor_bt;
 	 private ImageView isnew;
 	 private Button downapk_tv;
+	 private Button youmi_bt;
 	 
 	 private void findAllViews(){
 		 cancle = (ImageView) findViewById(R.id.cancle);
@@ -89,6 +119,8 @@ public class ConfigActivity extends Activity{
 		 second_textcolor_bt = (Button) findViewById(R.id.second_textcolor_bt);
 		 downapk_tv = (Button) findViewById(R.id.downapk_tv);
 		 isnew = (ImageView) findViewById(R.id.isnew);
+		 
+		 youmi_bt = (Button)findViewById(R.id.youmi_bt);
 	 }
 	 
 	 //初始化值
@@ -122,6 +154,23 @@ public class ConfigActivity extends Activity{
 	 
 	 private void createActions(){
 		 isnew.setVisibility(View.GONE);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO 自动生成的方法存根
+					checkVersion();
+					
+				}
+			}).start();
+		 downapk_tv.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO 自动生成的方法存根
+				downApk();
+			}
+		});
 		 
 		 
 		 first_back_bt.setOnClickListener(new OnClickListener() {
@@ -261,6 +310,21 @@ public class ConfigActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO 自动生成的方法存根
+				String firstconfig = spxml.getConfigSharedPreferences("firstconfig", "true");
+				if(Boolean.valueOf(firstconfig)){
+					if(PointsManager.getInstance(mContext).spendPoints(20)){           
+				        //Log.d("test","已消费100积分");
+					 	Toast.makeText(mContext, "首次保存消耗20积分，只消耗此一次，此后无再需积分",
+					 			Toast.LENGTH_LONG).show();
+					 	spxml.setConfigSharedPreferences("firstconfig", "false");
+				    }else{
+				        //Log.d("text","消费积分失败(积分余额不足)");
+				    	Toast.makeText(mContext, "首次保存需消耗20积分，只消耗此一次，此后无再需积分，" +
+				    			"您积分不够，保存失败",
+					 			Toast.LENGTH_LONG).show();
+				    	return;
+				    }   
+				 }
 				String f_1 = first_name_1.getText().toString().trim();
 				String f_2 = first_name_2.getText().toString();
 				
@@ -287,17 +351,213 @@ public class ConfigActivity extends Activity{
 			}
 		});
 		 
+		 PointsManager.getInstance(this).awardPoints(1);    
+		 youmi_bt.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO 自动生成的方法存根
+				OffersManager.getInstance(mContext).showOffersWall();
+			}
+		});
+		 
 	 }
 	 
-	private void checkVersion() {
+	private void  checkVersion() {
+	
+		
+		String localpath = base+"/person_ily.xml";
 		String downurl = "http://www.iever.cn/YJdown/person_ily.xml";		
-		final HttpDownFile down2 = new HttpDownFile(downurl,
-				"/mnt/sdcard/iloveyou/person_ily.xml");
+		final HttpDownFile down2 = new HttpDownFile(downurl,localpath
+				);
 		boolean f = down2.DownFile();
 		if (!f) {
-			return;
+			return ;
+		}
+		
+		try {
+			VersionXml.init().getApkVersionXml(localpath);
+			ApkVersionInfo info = ApkVersionInfo.downloadinfo;
+			String cur;
+			cur = getCurrentVersionName();
+			if(cur.equals(info.getVersionCode())){ 
+				handler.obtainMessage(ISNEW_VISIBLE, 0, 0).sendToTarget();
+				//isnew.setVisibility(View.GONE);
+				//return false;
+			}else{
+				handler.obtainMessage(ISNEW_VISIBLE, 1, 1).sendToTarget();
+				//isnew.setVisibility(View.VISIBLE);
+				//return true;
+			}
+		} catch (NameNotFoundException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		catch (XmlPullParserException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
 		}
 	}
+	
+
+	//获取当前的版本名字
+	private String getCurrentVersionName() throws NameNotFoundException{
+		PackageManager packagemanager = mContext.getPackageManager();
+		PackageInfo packageinfo = packagemanager.getPackageInfo(
+				mContext.getPackageName(), 0);
+		return packageinfo.versionName;
+	}
+	
+	private ProgressBar pro;
+	private void downApk(){
+		//final String base  = Environment.getExternalStorageDirectory().getPath();
+		String localpath = base+"/person_ily.xml";
+		
+		ApkVersionInfo info = ApkVersionInfo.downloadinfo;
+		String cur;
+		try {
+			cur = getCurrentVersionName();
+			if(cur.equals(info.getVersionCode())){ 
+				Toast.makeText(mContext, "版本相同，无需下载", Toast.LENGTH_SHORT).show();
+			}else{
+				//下载
+				AlertDialog.Builder builer = new Builder(ConfigActivity.this) ; 
+				builer.setTitle("版本升级"); 
+				LayoutInflater mInflater = (LayoutInflater) ConfigActivity.this
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View view = mInflater.inflate(R.layout.con_downapk, null);
+				TextView current_version = (TextView) view.findViewById(R.id.current_version);
+				 pro = (ProgressBar) view.findViewById(R.id.pro);
+				TextView text = (TextView) view.findViewById(R.id.text);
+				current_version.setText("当前版本是："+cur);
+				text.setText(info.getUpdataDescription());
+				
+				builer.setView(view);
+				AlertDialog dialog = builer.create(); 
+				dialog.show();
+				
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO 自动生成的方法存根
+						String g = ApkVersionInfo.downloadinfo.getApkUrl();
+						String lo = base+"/iloveyou.apk";
+						try {
+							getFileFromServer(g,lo);
+						} catch (Exception e) {
+							// TODO 自动生成的 catch 块
+							e.printStackTrace();
+						}
+					}
+				}).start();
+			}
+		}catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private final int changepro = 1;
+	private final int DOWNOK = 2;
+	private final int ISNEW_VISIBLE = 3;
+	 Handler handler = new Handler()
+	  {
+	    public void handleMessage(Message mm)
+	    {
+	      switch (mm.what)
+	      {
+	      case changepro:
+	    	  if(pro != null)
+	    		  pro.setProgress(mm.arg1);
+	    	  break;
+	      case DOWNOK:
+	    	  installApk();
+	    	  break;
+	      case ISNEW_VISIBLE:
+	    	  if(mm.arg1 == 1)
+	    		  isnew.setVisibility(View.VISIBLE);
+	    	  else isnew.setVisibility(View.GONE);
+	    	  break;
+	      }
+	    }
+	  };
+	  
+	// 安装apk
+	protected void installApk() {
+		//final String base  = Environment.getExternalStorageDirectory().getPath();
+		String lo = base+"/iloveyou.apk";
+		File file = new File(lo);
+		Intent intent = new Intent();
+		// 执行动作
+		intent.setAction(Intent.ACTION_VIEW);
+		// 执行的数据类型
+		intent.setDataAndType(Uri.fromFile(file),
+				"application/vnd.android.package-archive");
+		ConfigActivity.this.startActivity(intent);
+
+	}
+	  
+	  
+	/**
+	 * 从服务器上取出更新的APK放到/sdcard/YongJingSmartHome/updata.apk（Comments）里
+	 * @param path 为UpdataInfo里ApkUrl
+	 * @param pd
+	 * @return
+	 * @throws Exception
+	 */
+	public  File getFileFromServer(String urlpath,String localp) throws Exception{ 
+		//如果相等的话表示当前的sdcard挂载在手机上并且是可用的 
+		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){ 
+			FileOutputStream fos=null;
+			BufferedInputStream bis=null;
+			InputStream is=null;
+			try{
+				System.out.println("apht:"+urlpath);
+			URL url = new URL(urlpath); 
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection(); 
+			conn.setConnectTimeout(5000); 
+			//获取到文件的大小 
+			//pd.setMax(100); 
+			 is = conn.getInputStream(); 
+			File file = Util.init().creatFileIfNotExist(localp); 
+			 fos = new FileOutputStream(file); 
+			 bis = new BufferedInputStream(is); 
+			
+			byte[] buffer = new byte[1024]; 
+			int len ; 
+			
+			int total=0; 
+			 int progress;
+			 int all = conn.getContentLength();
+			while((len =bis.read(buffer))!=-1){ 
+				fos.write(buffer, 0, len); 
+				total+= len; 
+				//获取当前下载量 
+				 progress= (total*100/all);
+				 handler.obtainMessage(changepro, progress, progress).sendToTarget();
+				
+			} 
+			handler.sendEmptyMessage(DOWNOK);
+			return file; 
+			}catch(SocketTimeoutException e){
+			
+				
+				return null;
+			}finally{
+				fos.close(); 				
+				bis.close(); 
+				is.close(); 
+			}
+		} else{ 
+		return null; 
+		} 
+	} 
+	
 	 
 	 
 	 public void gotoFirstAc(){

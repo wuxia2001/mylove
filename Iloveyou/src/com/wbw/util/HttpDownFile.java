@@ -77,7 +77,7 @@ public class HttpDownFile  {
 				{
 					return false;
 				}else{
-					//Log.v(Comments.TAG, "ready to get writeSD");
+					System.out.println( "ready to get writeSD");
 					File resultFile = Util.init().writeFromInputToSD(path, inputStream);
 					//Log.v(Comments.TAG, "finist to write");
 					if(resultFile==null){

@@ -1,6 +1,8 @@
 package com.wbw.util;
 
 
+import net.youmi.android.offers.OffersManager;
+
 import com.wbw.iloveyou.R;
 import com.wbw.inter.AllSurfaceView;
 
@@ -12,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 
 
@@ -21,6 +24,11 @@ private NotificationManager myNotiManager;  //状态提示栏
 	
 	
 	public CloseAction(final Context context,final AllSurfaceView sv){
+		String firstconfig = SharedPreferencesXml.init().getConfigSharedPreferences("firstconfig", "true");
+		if(Boolean.valueOf(firstconfig)){
+			Toast.makeText(context, R.string.tishi,
+		 			Toast.LENGTH_LONG).show();
+		}
 		myNotiManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
 		new AlertDialog.Builder(context)
 		.setIcon(android.R.drawable.ic_dialog_alert)
@@ -39,7 +47,10 @@ private NotificationManager myNotiManager;  //状态提示栏
 					public void onClick(DialogInterface dialog,
 							int whichButton) {
 						//sv.setRun(false);
-						sv.setRun(true);
+						if(sv != null)
+							sv.setRun(true);
+						//有米
+						OffersManager.getInstance(context).onAppExit(); 
 						System.exit(0);
 					}
 				})

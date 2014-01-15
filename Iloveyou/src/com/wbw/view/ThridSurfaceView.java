@@ -71,21 +71,30 @@ SurfaceHolder.Callback,AllSurfaceView {
 	private int dropnum = 0;
 	
 	private void dropthread_Add(int dn,Thread dr){
-		dropthread.put(dn,dr);
+		synchronized (dropthread) {
+			
+			dropthread.put(dn,dr);
+		}
 	}
 	
 	public void dropthread_Remove(int dn){
-		dropthread.remove(dn);
+		synchronized (dropthread) {
+			dropthread.remove(dn);
+		}
 	}
 	
 	public void dropthread_Iterator(){
-		Iterator<Integer> iterator = dropthread.keySet().iterator();        
-	    while (iterator.hasNext()) {    
-	    	Thread t = dropthread.get(iterator.next());
-	    	if(t != null && t.isAlive())
-	    		t.interrupt();
-	        //System.out.println(hm.get(iterator.next()));    
-	    }    
+		synchronized (dropthread) {
+			
+		
+			Iterator<Integer> iterator = dropthread.keySet().iterator();        
+		    while (iterator.hasNext()) {    
+		    	Thread t = dropthread.get(iterator.next());
+		    	if(t != null && t.isAlive())
+		    		t.interrupt();
+		        //System.out.println(hm.get(iterator.next()));    
+		    }   
+		}
 	}
 
 	public void setRun(boolean is){
@@ -116,6 +125,8 @@ SurfaceHolder.Callback,AllSurfaceView {
 	private int dest_x,dest_y;  //画变大的心的最左边和最上边位置
 	private int beau_w,beau_h;
 	int dnum =20;
+	
+	int xadd = 0;
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO 自动生成的方法存根
@@ -125,14 +136,22 @@ SurfaceHolder.Callback,AllSurfaceView {
 		Bitmap beau = bitmapcache.getBitmap(R.drawable.beau1, mContext);  //仙女
 		Bitmap stick = bitmapcache.getBitmap(R.drawable.stick, mContext);  //魔棒
 		Bitmap big = bitmapcache.getBitmap(R.drawable.big1, mContext);
+	
 		
+		if(w>=500) xadd = xadd+10;
+		if(w>=600) xadd = xadd+20;
+		if(w>=800) xadd = xadd+20;
+		
+		if(w>=1000) xadd = xadd+30;
+		if(w>=1500) xadd = xadd+30;
+ 		
 		Paint p = new Paint();
-		dest_x = 163+big.getWidth()/2;  //变大的心的起点
+		dest_x = 163+big.getWidth()/2 +xadd;  //变大的心的起点
 		dest_y = 190;
 		beau_w = beau.getWidth();
 		beau_h = beau.getHeight();
 		//
-		dropx = 160;  //下缀的起始位置
+		dropx = 160 +xadd;  //下缀的起始位置
 		dropy = dest_y;
 		Bitmap llove = bitmapcache.getBitmap(R.drawable.big_h, mContext);
 		int bw = llove.getWidth();
@@ -146,13 +165,18 @@ SurfaceHolder.Callback,AllSurfaceView {
 				try {
 					c = holder.lockCanvas();					
 					c.drawColor(Color.TRANSPARENT,Mode.CLEAR);
-					c.drawBitmap(beau, 0,0, p);
-					c.drawBitmap(stick, 155,120, p);
+					c.drawBitmap(beau, 0+xadd,0, p);
+					c.drawBitmap(stick, dropx-5 ,dropy-70, p);
 				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {
-					if(c!=null)
-					holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+					try{
+						if (c != null){
+							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						}
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 				}
 
 			}
@@ -185,6 +209,7 @@ SurfaceHolder.Callback,AllSurfaceView {
 	
 	//定义位置
 	private int cx,dx,fx,gx,ay,by;
+	private int maxziy;
 	private void drawText(){
 //		String a = "一生一世";
 //		String b = "不离不弃";
@@ -221,8 +246,8 @@ SurfaceHolder.Callback,AllSurfaceView {
 		StringKind[] ab = new StringKind[2];
 		ay = 100;
 		by = 200;
-		StringKind a_kind = new StringKind(a,0,beau_w+20,ay,10);
-		StringKind b_kind = new StringKind(b,0,beau_w+20,by,10);
+		StringKind a_kind = new StringKind(a,0,beau_w+20+xadd,ay,10);
+		StringKind b_kind = new StringKind(b,0,beau_w+20+xadd,by,10);
 		ab[0] = a_kind;
 		ab[1] = b_kind;
 		abthread = new drawTextThread(ab);
@@ -234,20 +259,58 @@ SurfaceHolder.Callback,AllSurfaceView {
 		 dx = w-2*w5+20;
 		//int fx = w-3*w5;
 		//int gx = w-4*w5;
-		 fx = dropx+dropw-5;
-		 gx = dropx+5-textsize;
+		 fx = dropx+dropw-5+xadd;
+		 gx = dropx+5-textsize-xadd;
 		
 		cx = checkTextXInDrop(cx);
 		dx = checkTextXInDrop(dx);
 		fx = checkTextXInDrop(fx);
 		gx = checkTextXInDrop(gx);
 		
+		int cy = 300,dy = 350,fy=400,gy=450;
+		int cg_space = 20;
+		
+		if(h<=700) {
+			textsize = 40;
+			cg_space = 10;
+			dy = 330;
+			fy = 360;
+			gy = 390;
+		}else if(h<=750){			
+				textsize = 40;
+				cg_space = 15;
+				dy = 335;
+				fy = 370;
+				gy = 405;			
+		}else if(h<=850){
+			textsize = 45;
+			cg_space = 15;
+			dy = 340;
+			fy = 380;
+			gy = 420;
+		}else if(h>=1000 && h<=1200){
+			textsize = 60;
+			cg_space = 25;
+			cy = 370;
+			dy = 430;
+			fy = 490;
+			gy = 550;
+		}else if(h>1200){
+			textsize = 65;
+			cg_space = 25;
+			cy = 400;
+			dy = 460;
+			fy = 520;
+			gy = 580;
+		}
 		
 		StringKind[] cdfg = new StringKind[4];
-		StringKind c_kind = new StringKind(c,1,cx,300,20);
-		StringKind d_kind = new StringKind(d,1,dx,350,20);
-		StringKind f_kind = new StringKind(f,1,fx,400,20);
-		StringKind g_kind = new StringKind(g,1,gx,450,20);
+		StringKind c_kind = new StringKind(c,1,cx,cy,cg_space);
+		StringKind d_kind = new StringKind(d,1,dx,dy,cg_space);
+		StringKind f_kind = new StringKind(f,1,fx,fy,cg_space);
+		StringKind g_kind = new StringKind(g,1,gx,gy,cg_space);
+		
+		maxziy = gy+4*(textsize+20);
 		cdfg[0] = c_kind;
 		cdfg[1] = d_kind;
 		cdfg[2] = f_kind;
@@ -350,8 +413,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-								holder.unlockCanvasAndPost(ca);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(ca);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 
 					}
@@ -384,7 +452,7 @@ SurfaceHolder.Callback,AllSurfaceView {
 			
 			//旋转的花
 			Bitmap hua = bitmapcache.getBitmap(R.drawable.hua, mContext);
-			int huax = dest_x-40;
+			int huax = dest_x-40+xadd/2;
 			int huay = 30;
 			int huaw = hua.getWidth();
 			int huah = hua.getHeight();
@@ -403,12 +471,12 @@ SurfaceHolder.Callback,AllSurfaceView {
 			int xin2h = xin2.getHeight();
 			//三个星1，三个星2
 			ArrayList<LoveDot> xinall = new ArrayList<LoveDot>();
-			xinall.add(new LoveDot(1,10,1));
-			xinall.add(new LoveDot(48,18,1));
-			xinall.add(new LoveDot(110,40,1));
-			xinall.add(new LoveDot(20,150,2));
-			xinall.add(new LoveDot(150,160,2));
-			xinall.add(new LoveDot(130,190,2));
+			xinall.add(new LoveDot(1+xadd,10,1));
+			xinall.add(new LoveDot(48+xadd,18,1));
+			xinall.add(new LoveDot(110+xadd,40,1));
+			xinall.add(new LoveDot(20+xadd,150,2));
+			xinall.add(new LoveDot(150+xadd,160,2));
+			xinall.add(new LoveDot(130+xadd,190,2));
 			
 			boolean xinboolean = true;  //为真的时候画星,为假的时候擦除
 			int oldx = 0;
@@ -444,8 +512,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null)
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 						//if(b2 != null)
 						//	b2.recycle();
 					}
@@ -483,8 +556,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 
 					}
@@ -515,8 +593,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null)
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 
 					}
@@ -555,8 +638,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null )
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 
 				}
@@ -581,8 +669,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 						} catch (Exception e) {
 							e.printStackTrace();
 						} finally {
-							if(c!=null )
-							holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							try{
+								if (c != null){
+									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								}
+							}catch(Exception e){
+								e.printStackTrace();
+							}
 						}
 
 					}
@@ -643,8 +736,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-						if(c!=null )
-						holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+						try{
+							if (c != null){
+								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+							}
+						}catch(Exception e){
+							e.printStackTrace();
+						}
 					}
 
 				}
@@ -668,13 +766,28 @@ SurfaceHolder.Callback,AllSurfaceView {
 						isright = false;
 					}
 					int le,top;
+					
+					int maxhh = endy - maxziy;
+					int rmin = 80,rmax = 100;
+					int lmin = 40,lmax = 50;
+					if(maxhh <100 && maxhh>50 ) {
+						rmin = 50;
+						rmax = 60;
+					}
+					if(maxhh < 50){
+						rmin = 30;
+						rmax = 40;
+						lmin = 20;
+						lmax = 30;
+					}
+					
 					if(isright){
 						le = w-startx;
-						top = getRandom(80, 100);
+						top = getRandom(rmin, rmax);
 					}
 					else {
 						le = startx+bw;
-						top = getRandom(40, 50);
+						top = getRandom(lmin,lmax);
 					}
 					for (int i = 1; i < le && !isallstop; i++) {// 计算正弦波
 						int x;
@@ -696,8 +809,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 							} catch (Exception e) {
 								e.printStackTrace();
 							} finally {
-								if(c!=null)
-								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								try{
+									if (c != null){
+										holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+									}
+								}catch(Exception e){
+									e.printStackTrace();
+								}
 							}
 
 						}// sy
@@ -773,8 +891,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 							} catch (Exception e) {
 								e.printStackTrace();
 							} finally {
-								if(c!=null )
-								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								try{
+									if (c != null){
+										holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+									}
+								}catch(Exception e){
+									e.printStackTrace();
+								}
 							}
 						}
 							try {
@@ -800,8 +923,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 							} catch (Exception e) {
 								e.printStackTrace();
 							} finally {
-								if(c!=null )
-								holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+								try{
+									if (c != null){
+										holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+									}
+								}catch(Exception e){
+									e.printStackTrace();
+								}
 							}
 						}
 							ld.num++;
@@ -817,8 +945,13 @@ SurfaceHolder.Callback,AllSurfaceView {
 								} catch (Exception e) {
 									e.printStackTrace();
 								} finally {
-									if(c!=null )
-									holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+									try{
+										if (c != null){
+											holder.unlockCanvasAndPost(c);// 结束锁定画图，并提交改变。
+										}
+									}catch(Exception e){
+										e.printStackTrace();
+									}
 								}
 								}
 								lovelist.remove(i);

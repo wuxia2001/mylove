@@ -4,6 +4,10 @@ package com.wbw.iloveyou;
 
 import java.io.InputStream;
 
+import net.youmi.android.AdManager;
+import net.youmi.android.offers.OffersManager;
+import net.youmi.android.offers.PointsManager;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -20,6 +24,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
@@ -74,6 +80,13 @@ public class FirstActivity extends Activity
 //    soundplay.setContext(mContext);
 //    soundplay.initSound();
     
+    //有米
+    AdManager.getInstance(this).init("8e48d0e4dad83d5c","a19d10440d91f5e4", false); 
+    OffersManager.getInstance(this).onAppLaunch(); 
+    PointsManager.getInstance(this).setEnableEarnPointsNotification(false);
+    //关闭积分到账悬浮框提示功能
+    PointsManager.getInstance(this).setEnableEarnPointsToastTips(false);
+    
     Util.init().setContext(mContext);
     spxml = SharedPreferencesXml.init();
     
@@ -94,6 +107,15 @@ public class FirstActivity extends Activity
     	spxml.setConfigSharedPreferences("firstrun", "false");
     }
     
+    System.out.println("w:"+screen_w+"  h:"+screen_h);
+    
+  }
+  
+  
+  private void findAllViews()
+  {
+    f1 = ((FrameLayout)findViewById(R.id.f1));
+    l1 = ((LinearLayout)findViewById(R.id.l1));
   }
   
   private void createActions()
@@ -131,15 +153,12 @@ public class FirstActivity extends Activity
     this.handler.sendEmptyMessageDelayed(SHOWHEART, 1000L);
     this.handler.sendEmptyMessageDelayed(SHOWZI, 1500L);
     this.handler.sendEmptyMessageDelayed(SOUND, 1100);
+    //fr.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE); 
   }
   
   
 
-  private void findAllViews()
-  {
-    this.f1 = ((FrameLayout)findViewById(R.id.f1));
-    this.l1 = ((LinearLayout)findViewById(R.id.l1));
-  }
+ 
   
   public void goSecond(){
 	Intent t = new Intent();
@@ -192,6 +211,7 @@ public class FirstActivity extends Activity
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO 自动生成的方法存根
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			
 			if(isconfig){
 				fr.setRun(true);
 				Intent t = new Intent();
@@ -201,8 +221,9 @@ public class FirstActivity extends Activity
 				overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 				FirstActivity.this.finish();
 				BitmapCache.getInstance().clearCache();  //软引用，跳到新界面可清空原来图片内存
-			}else
+			}else{
 				new CloseAction(FirstActivity.this,fr);
+			}
 			return true;
 		} else if(keyCode == KeyEvent.KEYCODE_MENU){
 			if(!isconfig){
@@ -214,6 +235,12 @@ public class FirstActivity extends Activity
 			return super.onKeyDown(keyCode, event);
 		}
 		
-	
+  @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return false;
+	}
+
   
 }

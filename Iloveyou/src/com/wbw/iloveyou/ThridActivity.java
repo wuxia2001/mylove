@@ -55,7 +55,7 @@ public class ThridActivity extends Activity{
 		    me = MediaPlay.init();
 		    String thrid_music = spxml.getConfigSharedPreferences("thrid_music", "0");
 		    if(thrid_music.equals("") || thrid_music.equals("0"))
-		    	me.InitMediaPlay(mContext,R.raw.thrid);
+		    	me.InitMediaPlay(mContext,R.raw.thrid_nan);
 		    else 
 		    	me.InitMediaPlay(mContext,thrid_music);
 	    
