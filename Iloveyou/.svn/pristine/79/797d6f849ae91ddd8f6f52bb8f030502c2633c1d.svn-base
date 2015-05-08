@@ -1,0 +1,27 @@
+# view AndroidManifest.xml #generated:45
+-keep class com.wbw.iloveyou.ConfigActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:18
+-keep class com.wbw.iloveyou.FirstActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:38
+-keep class com.wbw.iloveyou.SecondActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:31
+-keep class com.wbw.iloveyou.ThridActivity { <init>(...); }
+
+# view res/layout/config.xml #generated:75
+-keep class com.wbw.view.SwitchButton { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
+-keep class net.youmi.android.AdBrowser { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class net.youmi.android.AdReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:58
+-keep class net.youmi.android.AdService { <init>(...); }
+
+# view AndroidManifest.xml #generated:68
+-keep class net.youmi.android.offers.OffersReceiver { <init>(...); }
+

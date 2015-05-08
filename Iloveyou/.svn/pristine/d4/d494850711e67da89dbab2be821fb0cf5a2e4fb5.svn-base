@@ -1,0 +1,81 @@
+package com.wbw.iloveyou;
+
+
+import com.wbw.view.PopConfigWindows;
+
+import com.wbw.widget.shimmer.FlyTxtView;
+import com.wbw.widget.shimmer.ShimmerFrameLayout;
+import com.wbw.widget.svg.CustomShapeImageView;
+import com.wbw.widget.svg.CustomShapeSquareImageView;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.TextureView;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+/**
+ * 第四个界面的设备界面
+ * @author wbw
+ * @version 创建时间：2015年4月23日  上午10:54:36
+ */
+public class FourConfigActivity extends Activity{
+	private Context mContext;
+	private ShimmerFrameLayout sf_imageview;
+	private RelativeLayout rl_middle_love;
+	private ImageView iv_love_picture,iv_love_love;
+	private CustomShapeImageView csi_top_left,csi_top_right;
+	private CustomShapeSquareImageView csi_bottom_left,csi_bottom_right;
+	private TextureView tv_left_name,tv_right_name;
+	private FlyTxtView ftv_say_love;
+	  @Override
+	  protected void onCreate(Bundle savedInstanceState) 
+	  {
+	    super.onCreate(savedInstanceState);
+	    requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    setContentView(R.layout.fourview);
+	    mContext  = this;
+	    
+	    //这个是那个闪光的效果，这里不用设置，要修改的请修改这里
+	    sf_imageview = (ShimmerFrameLayout) findViewById(R.id.sf_imageview);
+	    sf_imageview.setBaseAlpha((float) 0.5);
+	    sf_imageview.setDuration(2000);
+	    sf_imageview.setRepeatDelay(500);
+	    sf_imageview.startShimmerAnimation();
+	    
+	    ftv_say_love = (FlyTxtView) findViewById(R.id.ftv_say_love1);
+	    ftv_say_love.init();
+	   // ftv_say_love.setTextColor(getResources().getColor(R.color.black));
+	    ftv_say_love.setTextSize(20);
+	    ftv_say_love.setTextColor(Color.GREEN);
+	    ftv_say_love.setTexts("我家你，请接受我的爱套票dsfasfasdfasdfdasfasdfafadfasdfdsfafd");
+	   // ftv_say_love.setTextSize(20);
+	    
+	   
+	    //ftv_say_love.startAnimation();
+	    //handler.sendEmptyMessageDelayed(START_FLY, 2000);	    
+	    rl_middle_love = (RelativeLayout) findViewById(R.id.rl_middle_love);	   
+	    csi_bottom_right = (CustomShapeSquareImageView) findViewById(R.id.csi_bottom_right);
+	    
+	    
+	  }
+	  
+	  private final int START_FLY = 0;
+	    Handler handler = new Handler() {
+	        public void handleMessage(Message msg) {
+	            switch (msg.what) {
+	            case START_FLY:
+	            	   ftv_say_love.startAnimation();
+	            	break;
+	            case PopConfigWindows.PIC_LOVE_TOP_LEFT:
+	            	break;
+	            
+	            }
+	        }
+	    };
+}

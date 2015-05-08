@@ -1,0 +1,50 @@
+# view AndroidManifest.xml #generated:48
+-keep class com.wbw.iloveyou.ConfigActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:41
+-keep class com.wbw.iloveyou.FirstActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:14
+-keep class com.wbw.iloveyou.FourConfigActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:34
+-keep class com.wbw.iloveyou.SecondActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:27
+-keep class com.wbw.iloveyou.ThridActivity { <init>(...); }
+
+# view res/layout/config.xml #generated:75
+-keep class com.wbw.view.SwitchButton { <init>(...); }
+
+# view res/layout/popwindows.xml #generated:29
+-keep class com.wbw.widget.cropper.CropImageView { <init>(...); }
+
+# view res/layout/crop_image_view.xml #generated:13
+-keep class com.wbw.widget.cropper.cropwindow.CropOverlayView { <init>(...); }
+
+# view res/layout/fourview.xml #generated:140
+-keep class com.wbw.widget.shimmer.FlyTxtView { <init>(...); }
+
+# view res/layout/fourview.xml #generated:9
+-keep class com.wbw.widget.shimmer.ShimmerFrameLayout { <init>(...); }
+
+# view res/layout/fourview.xml #generated:49
+# view res/layout/fourview.xml #generated:60
+-keep class com.wbw.widget.svg.CustomShapeImageView { <init>(...); }
+
+# view res/layout/fourview.xml #generated:71
+# view res/layout/fourview.xml #generated:83
+-keep class com.wbw.widget.svg.CustomShapeSquareImageView { <init>(...); }
+
+# view AndroidManifest.xml #generated:56
+-keep class net.youmi.android.AdBrowser { <init>(...); }
+
+# view AndroidManifest.xml #generated:67
+-keep class net.youmi.android.AdReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class net.youmi.android.AdService { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class net.youmi.android.offers.OffersReceiver { <init>(...); }
+

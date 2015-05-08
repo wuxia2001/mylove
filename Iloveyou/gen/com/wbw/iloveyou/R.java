@@ -17,74 +17,274 @@ public final class R {
         public static final int zoom_exit=0x7f040005;
     }
     public static final class attr {
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>cw_0</code></td><td>0</td><td></td></tr>
+<tr><td><code>cw_90</code></td><td>90</td><td></td></tr>
+<tr><td><code>cw_180</code></td><td>180</td><td></td></tr>
+<tr><td><code>cw_270</code></td><td>270</td><td></td></tr>
+</table>
+         */
+        public static final int angle=0x7f010008;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int aspectRatioX=0x7f010013;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int aspectRatioY=0x7f010014;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int auto_start=0x7f010002;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int base_alpha=0x7f010003;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int dropoff=0x7f010009;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int duration=0x7f010004;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fixAspectRatio=0x7f010012;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fixed_height=0x7f01000b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fixed_width=0x7f01000a;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>on</code></td><td>2</td><td></td></tr>
+<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
+<tr><td><code>off</code></td><td>0</td><td></td></tr>
+</table>
+         */
+        public static final int guidelines=0x7f010011;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int imageResource=0x7f010015;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int intensity=0x7f01000c;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int relative_height=0x7f01000e;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int relative_width=0x7f01000d;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int repeat_count=0x7f010005;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int repeat_delay=0x7f010006;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>restart</code></td><td>1</td><td></td></tr>
+<tr><td><code>reverse</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int repeat_mode=0x7f010007;
+        /** <p>May be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>circle</code></td><td>1</td><td></td></tr>
+<tr><td><code>rectangle</code></td><td>2</td><td></td></tr>
+<tr><td><code>svg</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int shape=0x7f010000;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>linear</code></td><td>0</td><td></td></tr>
+<tr><td><code>radial</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int shape1=0x7f01000f;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int svg_raw_resource=0x7f010001;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int tilt=0x7f010010;
     }
     public static final class color {
         /**  粉蓝色 
          */
-        public static final int aqua=0x7f060015;
-        public static final int black=0x7f060003;
+        public static final int aqua=0x7f060016;
+        public static final int black=0x7f060004;
+        public static final int black_translucent=0x7f060000;
         /**  花白色 
          */
-        public static final int blanchedalmond=0x7f06000d;
-        public static final int blue=0x7f060004;
+        public static final int blanchedalmond=0x7f06000e;
+        public static final int blue=0x7f060005;
         /**  深天蓝色 
          */
-        public static final int blueblue=0x7f06001c;
-        public static final int bule=0x7f060000;
+        public static final int blueblue=0x7f06001d;
+        public static final int bule=0x7f060001;
         /**  浅绿色 
          */
-        public static final int cyan=0x7f060016;
+        public static final int cyan=0x7f060017;
         /**  中春绿色 
          */
-        public static final int darkturquoise=0x7f06001a;
-        public static final int deeppink=0x7f06000a;
+        public static final int darkturquoise=0x7f06001b;
+        public static final int deeppink=0x7f06000b;
         /**  暗宝石绿 
          */
-        public static final int deepskyblue=0x7f06001b;
+        public static final int deepskyblue=0x7f06001c;
         /**  雪白色 
          */
-        public static final int floralwhite=0x7f06000c;
+        public static final int floralwhite=0x7f06000d;
+        public static final int four_string=0x7f060020;
         /**  桃色 
          */
-        public static final int gold=0x7f060010;
-        public static final int green=0x7f060008;
-        public static final int grey=0x7f060002;
+        public static final int gold=0x7f060011;
+        public static final int green=0x7f060009;
+        public static final int grey=0x7f060003;
         /**  粉红色 
          */
-        public static final int honeydew=0x7f060012;
-        public static final int huang=0x7f06001d;
-        public static final int lblue=0x7f060009;
+        public static final int honeydew=0x7f060013;
+        public static final int huang=0x7f06001e;
+        public static final int lblue=0x7f06000a;
         /**  春绿色 
          */
-        public static final int lime=0x7f060018;
-        public static final int littleblack=0x7f060006;
+        public static final int lime=0x7f060019;
+        public static final int littleblack=0x7f060007;
+        public static final int love_pink=0x7f06001f;
         /**  蜜色 
          */
-        public static final int mediumorchid=0x7f060013;
+        public static final int mediumorchid=0x7f060014;
         /**  酸橙色 
          */
-        public static final int mediumspringgreen=0x7f060019;
+        public static final int mediumspringgreen=0x7f06001a;
         /**  白杏色 
          */
-        public static final int mistyrose=0x7f06000e;
+        public static final int mistyrose=0x7f06000f;
         /**  浅玫瑰色 
          */
-        public static final int peachpuff=0x7f06000f;
+        public static final int peachpuff=0x7f060010;
         /**  金色 
          */
-        public static final int pink=0x7f060011;
+        public static final int pink=0x7f060012;
         /**  中粉紫色 
          */
-        public static final int powderblue=0x7f060014;
-        public static final int red=0x7f060005;
+        public static final int powderblue=0x7f060015;
+        public static final int red=0x7f060006;
         /**  深粉红色 
          */
-        public static final int snow=0x7f06000b;
+        public static final int snow=0x7f06000c;
         /**  青色 
          */
-        public static final int springgreen=0x7f060017;
-        public static final int wblue=0x7f060007;
-        public static final int white=0x7f060001;
+        public static final int springgreen=0x7f060018;
+        public static final int wblue=0x7f060008;
+        public static final int white=0x7f060002;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -114,169 +314,230 @@ public final class R {
         public static final int a9=0x7f020012;
         public static final int allbackground=0x7f020013;
         public static final int beau1=0x7f020014;
-        public static final int bg_second=0x7f020015;
-        public static final int big1=0x7f020016;
-        public static final int big15=0x7f020017;
-        public static final int big99=0x7f020018;
-        public static final int big_h=0x7f020019;
-        public static final int bottom=0x7f02001a;
-        public static final int btn_pressed=0x7f02001b;
-        public static final int btn_unpressed=0x7f02001c;
-        public static final int button=0x7f02001d;
-        public static final int button_normal=0x7f02001e;
-        public static final int button_pressed=0x7f02001f;
-        public static final int cancel_normal=0x7f020020;
-        public static final int cancel_pressed=0x7f020021;
-        public static final int cancle=0x7f020022;
-        public static final int common_toolbar_bg=0x7f020023;
-        public static final int divide=0x7f020024;
-        public static final int down1=0x7f020025;
-        public static final int down2=0x7f020026;
-        public static final int down_left=0x7f020027;
-        public static final int down_right=0x7f020028;
-        public static final int downmidd=0x7f020029;
-        public static final int frame=0x7f02002a;
-        public static final int h_m_m=0x7f02002b;
-        public static final int hua=0x7f02002c;
-        public static final int hudei=0x7f02002d;
-        public static final int ic_=0x7f02002e;
-        public static final int iloveyou_l=0x7f02002f;
-        public static final int itembackground=0x7f020030;
-        public static final int left1=0x7f020031;
-        public static final int left3=0x7f020032;
-        public static final int left66=0x7f020033;
-        public static final int leftd=0x7f020034;
-        public static final int ll=0x7f020035;
-        public static final int love=0x7f020036;
-        public static final int love_m_left=0x7f020037;
-        public static final int love_middle_down=0x7f020038;
-        public static final int love_middle_up=0x7f020039;
-        public static final int mask=0x7f02003a;
-        public static final int midd_midd_left=0x7f02003b;
-        public static final int midd_midd_right=0x7f02003c;
-        public static final int new_iv=0x7f02003d;
-        public static final int ok=0x7f02003e;
-        public static final int ok_normal=0x7f02003f;
-        public static final int ok_pressed=0x7f020040;
-        public static final int q1=0x7f020041;
-        public static final int q2=0x7f020042;
-        public static final int q3=0x7f020043;
-        public static final int q4=0x7f020044;
-        public static final int q5=0x7f020045;
-        public static final int q6=0x7f020046;
-        public static final int qq=0x7f020047;
-        public static final int right1=0x7f020048;
-        public static final int right2=0x7f020049;
-        public static final int right3=0x7f02004a;
-        public static final int right4=0x7f02004b;
-        public static final int right5=0x7f02004c;
-        public static final int right6=0x7f02004d;
-        public static final int right7=0x7f02004e;
-        public static final int right9=0x7f02004f;
-        public static final int rightdown1=0x7f020050;
-        public static final int stick=0x7f020051;
-        public static final int title=0x7f020052;
-        public static final int ulr1=0x7f020053;
-        public static final int up0=0x7f020054;
-        public static final int up1=0x7f020055;
-        public static final int up2=0x7f020056;
-        public static final int up3=0x7f020057;
-        public static final int up_left=0x7f020058;
-        public static final int up_right=0x7f020059;
-        public static final int upmidd=0x7f02005a;
-        public static final int xin1=0x7f02005b;
-        public static final int xin2=0x7f02005c;
-        public static final int xin3=0x7f02005d;
-        public static final int xin4=0x7f02005e;
-        public static final int xxing=0x7f02005f;
+        public static final int bg_black=0x7f020015;
+        public static final int bg_blue=0x7f020016;
+        public static final int bg_grey=0x7f020017;
+        public static final int bg_second=0x7f020018;
+        public static final int big1=0x7f020019;
+        public static final int big15=0x7f02001a;
+        public static final int big99=0x7f02001b;
+        public static final int big_h=0x7f02001c;
+        public static final int bottom=0x7f02001d;
+        public static final int btn_pressed=0x7f02001e;
+        public static final int btn_unpressed=0x7f02001f;
+        public static final int button=0x7f020020;
+        public static final int button_normal=0x7f020021;
+        public static final int button_pressed=0x7f020022;
+        public static final int caclose=0x7f020023;
+        public static final int cancel_normal=0x7f020024;
+        public static final int cancel_pressed=0x7f020025;
+        public static final int cancle=0x7f020026;
+        public static final int common_toolbar_bg=0x7f020027;
+        public static final int divide=0x7f020028;
+        public static final int down1=0x7f020029;
+        public static final int down2=0x7f02002a;
+        public static final int down_left=0x7f02002b;
+        public static final int down_right=0x7f02002c;
+        public static final int downmidd=0x7f02002d;
+        public static final int four_bg=0x7f02002e;
+        public static final int four_bg_bit=0x7f02002f;
+        public static final int four_love_bg=0x7f020030;
+        public static final int four_love_pic=0x7f020031;
+        public static final int four_zi=0x7f020032;
+        public static final int frame=0x7f020033;
+        public static final int h_m_m=0x7f020034;
+        public static final int hua=0x7f020035;
+        public static final int hudei=0x7f020036;
+        public static final int ic=0x7f020037;
+        public static final int ic_=0x7f020038;
+        public static final int iloveyou_l=0x7f020039;
+        public static final int itembackground=0x7f02003a;
+        public static final int left1=0x7f02003b;
+        public static final int left3=0x7f02003c;
+        public static final int left66=0x7f02003d;
+        public static final int leftd=0x7f02003e;
+        public static final int ll=0x7f02003f;
+        public static final int love=0x7f020040;
+        public static final int love_m_left=0x7f020041;
+        public static final int love_middle_down=0x7f020042;
+        public static final int love_middle_up=0x7f020043;
+        public static final int mask=0x7f020044;
+        public static final int midd_midd_left=0x7f020045;
+        public static final int midd_midd_right=0x7f020046;
+        public static final int new_iv=0x7f020047;
+        public static final int ok=0x7f020048;
+        public static final int ok_normal=0x7f020049;
+        public static final int ok_pressed=0x7f02004a;
+        public static final int q1=0x7f02004b;
+        public static final int q2=0x7f02004c;
+        public static final int q3=0x7f02004d;
+        public static final int q4=0x7f02004e;
+        public static final int q5=0x7f02004f;
+        public static final int q6=0x7f020050;
+        public static final int qq=0x7f020051;
+        public static final int right1=0x7f020052;
+        public static final int right2=0x7f020053;
+        public static final int right3=0x7f020054;
+        public static final int right4=0x7f020055;
+        public static final int right5=0x7f020056;
+        public static final int right6=0x7f020057;
+        public static final int right7=0x7f020058;
+        public static final int right9=0x7f020059;
+        public static final int rightdown1=0x7f02005a;
+        public static final int sample=0x7f02005b;
+        public static final int selector_button1=0x7f02005c;
+        public static final int stick=0x7f02005d;
+        public static final int title=0x7f02005e;
+        public static final int ulr1=0x7f02005f;
+        public static final int up0=0x7f020060;
+        public static final int up1=0x7f020061;
+        public static final int up2=0x7f020062;
+        public static final int up3=0x7f020063;
+        public static final int up_left=0x7f020064;
+        public static final int up_right=0x7f020065;
+        public static final int upmidd=0x7f020066;
+        public static final int xin1=0x7f020067;
+        public static final int xin2=0x7f020068;
+        public static final int xin3=0x7f020069;
+        public static final int xin4=0x7f02006a;
+        public static final int xxing=0x7f02006b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0b002e;
-        public static final int cancle=0x7f0b0004;
-        public static final int config_ll=0x7f0b0003;
-        public static final int current_version=0x7f0b0000;
-        public static final int downapk_tv=0x7f0b0006;
-        public static final int f1=0x7f0b0029;
-        public static final int f2=0x7f0b002b;
-        public static final int f3=0x7f0b002d;
-        public static final int first_back_bt=0x7f0b0010;
-        public static final int first_back_tv=0x7f0b000a;
-        public static final int first_et_1=0x7f0b000e;
-        public static final int first_et_2=0x7f0b000f;
-        public static final int first_music_bt=0x7f0b0012;
-        public static final int first_music_tv=0x7f0b0011;
-        public static final int first_t1=0x7f0b000c;
-        public static final int first_t2=0x7f0b000d;
-        public static final int isnew=0x7f0b0007;
-        public static final int l1=0x7f0b0028;
-        public static final int l2=0x7f0b002a;
-        public static final int l3=0x7f0b002c;
-        public static final int music_on_off=0x7f0b000b;
-        public static final int ok=0x7f0b0005;
-        public static final int pro=0x7f0b0001;
-        public static final int reset_bt=0x7f0b0008;
-        public static final int second_back_bt=0x7f0b0019;
-        public static final int second_back_tv=0x7f0b0018;
-        public static final int second_enter_bt=0x7f0b0014;
-        public static final int second_et=0x7f0b0015;
-        public static final int second_text_color=0x7f0b0016;
-        public static final int second_textcolor_bt=0x7f0b0017;
-        public static final int second_tv=0x7f0b0013;
-        public static final int text=0x7f0b0002;
-        public static final int thrid_back_bt=0x7f0b0025;
-        public static final int thrid_back_tv=0x7f0b0024;
-        public static final int thrid_f_et_1=0x7f0b001c;
-        public static final int thrid_f_et_2=0x7f0b001d;
-        public static final int thrid_music_bt=0x7f0b0027;
-        public static final int thrid_music_tv=0x7f0b0026;
-        public static final int thrid_s_et_1=0x7f0b0020;
-        public static final int thrid_s_et_2=0x7f0b0021;
-        public static final int thrid_s_et_3=0x7f0b0022;
-        public static final int thrid_s_et_4=0x7f0b0023;
-        public static final int thrid_t1=0x7f0b001a;
-        public static final int thrid_t2=0x7f0b001b;
-        public static final int thrid_t3=0x7f0b001e;
-        public static final int thrid_t4=0x7f0b001f;
-        public static final int youmi_bt=0x7f0b0009;
+        public static final int CropOverlayView=0x7f080042;
+        public static final int ImageView_image=0x7f080041;
+        public static final int action_settings=0x7f08005b;
+        public static final int bt_fourview_cofig=0x7f08003f;
+        public static final int bt_fristview_cofig=0x7f08001c;
+        public static final int bt_secondview_cofig=0x7f080026;
+        public static final int bt_thridview_cofig=0x7f08002f;
+        public static final int btn_submit=0x7f080056;
+        public static final int cancle=0x7f080014;
+        public static final int circle=0x7f080002;
+        public static final int civ_crop=0x7f080055;
+        public static final int config_ll=0x7f080013;
+        public static final int csi_bottom_left=0x7f08004c;
+        public static final int csi_bottom_right=0x7f08004d;
+        public static final int csi_top_left=0x7f08004a;
+        public static final int csi_top_right=0x7f08004b;
+        public static final int current_version=0x7f080010;
+        public static final int cw_0=0x7f080007;
+        public static final int cw_180=0x7f080008;
+        public static final int cw_270=0x7f080009;
+        public static final int cw_90=0x7f08000a;
+        public static final int downapk_tv=0x7f080016;
+        public static final int et_text=0x7f080054;
+        public static final int expandable=0x7f080001;
+        public static final int expandable_toggle_button=0x7f080000;
+        public static final int f1=0x7f080044;
+        public static final int f2=0x7f080058;
+        public static final int f3=0x7f08005a;
+        public static final int first_back_bt=0x7f080023;
+        public static final int first_back_tv=0x7f08001a;
+        public static final int first_back_tv11=0x7f080022;
+        public static final int first_et_1=0x7f080020;
+        public static final int first_et_2=0x7f080021;
+        public static final int first_music_bt=0x7f080025;
+        public static final int first_music_tv=0x7f080024;
+        public static final int first_t1=0x7f08001e;
+        public static final int first_t2=0x7f08001f;
+        public static final int ftv_say_love1=0x7f080052;
+        public static final int isnew=0x7f080017;
+        public static final int iv_close=0x7f080053;
+        public static final int iv_love_love=0x7f080049;
+        public static final int iv_love_picture=0x7f080048;
+        public static final int iv_love_pink=0x7f08004e;
+        public static final int l1=0x7f080043;
+        public static final int l2=0x7f080057;
+        public static final int l3=0x7f080059;
+        public static final int linear=0x7f08000b;
+        public static final int ll_four=0x7f080045;
+        public static final int ll_ll_firstview_config=0x7f08001d;
+        public static final int ll_ll_secondview_config=0x7f080027;
+        public static final int ll_ll_thridview_config=0x7f080030;
+        public static final int ll_name=0x7f08004f;
+        public static final int music_on_off=0x7f08001b;
+        public static final int off=0x7f08000d;
+        public static final int ok=0x7f080015;
+        public static final int on=0x7f08000e;
+        public static final int onTouch=0x7f08000f;
+        public static final int pro=0x7f080011;
+        public static final int radial=0x7f08000c;
+        public static final int rectangle=0x7f080003;
+        public static final int reset_bt=0x7f080018;
+        public static final int restart=0x7f080005;
+        public static final int reverse=0x7f080006;
+        public static final int rl_middle_love=0x7f080047;
+        public static final int second_back_bt=0x7f08002e;
+        public static final int second_back_tv=0x7f08002d;
+        public static final int second_enter_bt=0x7f080029;
+        public static final int second_et=0x7f08002a;
+        public static final int second_text_color=0x7f08002b;
+        public static final int second_textcolor_bt=0x7f08002c;
+        public static final int second_tv=0x7f080028;
+        public static final int second_tv1=0x7f080040;
+        public static final int sf_imageview=0x7f080046;
+        public static final int svg=0x7f080004;
+        public static final int text=0x7f080012;
+        public static final int thrid_back_bt=0x7f08003c;
+        public static final int thrid_back_tv=0x7f08003b;
+        public static final int thrid_f_et_1=0x7f080033;
+        public static final int thrid_f_et_2=0x7f080034;
+        public static final int thrid_music_bt=0x7f08003e;
+        public static final int thrid_music_tv=0x7f08003d;
+        public static final int thrid_s_et_1=0x7f080037;
+        public static final int thrid_s_et_2=0x7f080038;
+        public static final int thrid_s_et_3=0x7f080039;
+        public static final int thrid_s_et_4=0x7f08003a;
+        public static final int thrid_t1=0x7f080031;
+        public static final int thrid_t2=0x7f080032;
+        public static final int thrid_t3=0x7f080035;
+        public static final int thrid_t4=0x7f080036;
+        public static final int tv_left_name=0x7f080050;
+        public static final int tv_right_name=0x7f080051;
+        public static final int youmi_bt=0x7f080019;
     }
     public static final class layout {
         public static final int con_downapk=0x7f030000;
         public static final int config=0x7f030001;
-        public static final int firstview=0x7f030002;
-        public static final int secondview=0x7f030003;
-        public static final int thridview=0x7f030004;
+        public static final int crop_image_view=0x7f030002;
+        public static final int firstview=0x7f030003;
+        public static final int fourview=0x7f030004;
+        public static final int popwindows=0x7f030005;
+        public static final int secondview=0x7f030006;
+        public static final int thridview=0x7f030007;
     }
     public static final class menu {
-        public static final int main=0x7f0a0000;
+        public static final int main=0x7f0b0000;
     }
     public static final class raw {
         public static final int heartv=0x7f050000;
-        public static final int thrid=0x7f050001;
-        public static final int thrid_nan=0x7f050002;
+        public static final int shape_heart=0x7f050001;
+        public static final int thrid=0x7f050002;
+        public static final int thrid_nan=0x7f050003;
     }
     public static final class string {
-        public static final int action_settings=0x7f080001;
-        public static final int app_name=0x7f080000;
-        public static final int btn_color_picker=0x7f080006;
-        public static final int cancle=0x7f080008;
-        public static final int configbackpic=0x7f08000a;
-        public static final int dialog_message=0x7f080004;
-        public static final int dialog_title=0x7f080003;
-        public static final int first_et_1=0x7f08000b;
-        public static final int first_et_2=0x7f08000c;
-        public static final int firstrun=0x7f080009;
-        public static final int hello_world=0x7f080002;
-        public static final int ok=0x7f080007;
-        public static final int reset_message=0x7f080005;
-        public static final int second_words=0x7f08000d;
-        public static final int sugg=0x7f080014;
-        public static final int thrid_f_et_1=0x7f08000e;
-        public static final int thrid_f_et_2=0x7f08000f;
-        public static final int thrid_s_et_1=0x7f080010;
-        public static final int thrid_s_et_2=0x7f080011;
-        public static final int thrid_s_et_3=0x7f080012;
-        public static final int thrid_s_et_4=0x7f080013;
-        public static final int tishi=0x7f080015;
+        public static final int action_settings=0x7f090001;
+        public static final int app_name=0x7f090000;
+        public static final int btn_color_picker=0x7f090006;
+        public static final int cancle=0x7f090008;
+        public static final int configbackpic=0x7f09000a;
+        public static final int dialog_message=0x7f090004;
+        public static final int dialog_title=0x7f090003;
+        public static final int first_et_1=0x7f09000b;
+        public static final int first_et_2=0x7f09000c;
+        public static final int firstrun=0x7f090009;
+        public static final int hello_world=0x7f090002;
+        public static final int ok=0x7f090007;
+        public static final int reset_message=0x7f090005;
+        public static final int second_words=0x7f09000d;
+        public static final int sugg=0x7f090014;
+        public static final int thrid_f_et_1=0x7f09000e;
+        public static final int thrid_f_et_2=0x7f09000f;
+        public static final int thrid_s_et_1=0x7f090010;
+        public static final int thrid_s_et_2=0x7f090011;
+        public static final int thrid_s_et_3=0x7f090012;
+        public static final int thrid_s_et_4=0x7f090013;
+        public static final int tishi=0x7f090015;
     }
     public static final class style {
         /** 
@@ -289,11 +550,424 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f0a0000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f090001;
-        public static final int normal_text=0x7f090002;
+        public static final int AppTheme=0x7f0a0001;
+        public static final int button_style=0x7f0a0003;
+        public static final int normal_text=0x7f0a0002;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a CropImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CropImageView_aspectRatioX com.wbw.iloveyou:aspectRatioX}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_aspectRatioY com.wbw.iloveyou:aspectRatioY}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_fixAspectRatio com.wbw.iloveyou:fixAspectRatio}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_guidelines com.wbw.iloveyou:guidelines}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_imageResource com.wbw.iloveyou:imageResource}</code></td><td></td></tr>
+           </table>
+           @see #CropImageView_aspectRatioX
+           @see #CropImageView_aspectRatioY
+           @see #CropImageView_fixAspectRatio
+           @see #CropImageView_guidelines
+           @see #CropImageView_imageResource
+         */
+        public static final int[] CropImageView = {
+            0x7f010011, 0x7f010012, 0x7f010013, 0x7f010014,
+            0x7f010015
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#aspectRatioX}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:aspectRatioX
+        */
+        public static final int CropImageView_aspectRatioX = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#aspectRatioY}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:aspectRatioY
+        */
+        public static final int CropImageView_aspectRatioY = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#fixAspectRatio}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:fixAspectRatio
+        */
+        public static final int CropImageView_fixAspectRatio = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#guidelines}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>on</code></td><td>2</td><td></td></tr>
+<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
+<tr><td><code>off</code></td><td>0</td><td></td></tr>
+</table>
+          @attr name com.wbw.iloveyou:guidelines
+        */
+        public static final int CropImageView_guidelines = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#imageResource}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.wbw.iloveyou:imageResource
+        */
+        public static final int CropImageView_imageResource = 4;
+        /** Attributes that can be used with a CustomShapeImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CustomShapeImageView_shape com.wbw.iloveyou:shape}</code></td><td></td></tr>
+           <tr><td><code>{@link #CustomShapeImageView_svg_raw_resource com.wbw.iloveyou:svg_raw_resource}</code></td><td></td></tr>
+           </table>
+           @see #CustomShapeImageView_shape
+           @see #CustomShapeImageView_svg_raw_resource
+         */
+        public static final int[] CustomShapeImageView = {
+            0x7f010000, 0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#shape}
+          attribute's value can be found in the {@link #CustomShapeImageView} array.
+
+
+          <p>May be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>circle</code></td><td>1</td><td></td></tr>
+<tr><td><code>rectangle</code></td><td>2</td><td></td></tr>
+<tr><td><code>svg</code></td><td>3</td><td></td></tr>
+</table>
+          @attr name com.wbw.iloveyou:shape
+        */
+        public static final int CustomShapeImageView_shape = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#svg_raw_resource}
+          attribute's value can be found in the {@link #CustomShapeImageView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.wbw.iloveyou:svg_raw_resource
+        */
+        public static final int CustomShapeImageView_svg_raw_resource = 1;
+        /** Attributes that can be used with a ShimmerFrameLayout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_angle com.wbw.iloveyou:angle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_auto_start com.wbw.iloveyou:auto_start}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_base_alpha com.wbw.iloveyou:base_alpha}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_dropoff com.wbw.iloveyou:dropoff}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_duration com.wbw.iloveyou:duration}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_fixed_height com.wbw.iloveyou:fixed_height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_fixed_width com.wbw.iloveyou:fixed_width}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_intensity com.wbw.iloveyou:intensity}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_relative_height com.wbw.iloveyou:relative_height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_relative_width com.wbw.iloveyou:relative_width}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_repeat_count com.wbw.iloveyou:repeat_count}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_repeat_delay com.wbw.iloveyou:repeat_delay}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_repeat_mode com.wbw.iloveyou:repeat_mode}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_shape1 com.wbw.iloveyou:shape1}</code></td><td></td></tr>
+           <tr><td><code>{@link #ShimmerFrameLayout_tilt com.wbw.iloveyou:tilt}</code></td><td></td></tr>
+           </table>
+           @see #ShimmerFrameLayout_angle
+           @see #ShimmerFrameLayout_auto_start
+           @see #ShimmerFrameLayout_base_alpha
+           @see #ShimmerFrameLayout_dropoff
+           @see #ShimmerFrameLayout_duration
+           @see #ShimmerFrameLayout_fixed_height
+           @see #ShimmerFrameLayout_fixed_width
+           @see #ShimmerFrameLayout_intensity
+           @see #ShimmerFrameLayout_relative_height
+           @see #ShimmerFrameLayout_relative_width
+           @see #ShimmerFrameLayout_repeat_count
+           @see #ShimmerFrameLayout_repeat_delay
+           @see #ShimmerFrameLayout_repeat_mode
+           @see #ShimmerFrameLayout_shape1
+           @see #ShimmerFrameLayout_tilt
+         */
+        public static final int[] ShimmerFrameLayout = {
+            0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005,
+            0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009,
+            0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d,
+            0x7f01000e, 0x7f01000f, 0x7f010010
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#angle}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>cw_0</code></td><td>0</td><td></td></tr>
+<tr><td><code>cw_90</code></td><td>90</td><td></td></tr>
+<tr><td><code>cw_180</code></td><td>180</td><td></td></tr>
+<tr><td><code>cw_270</code></td><td>270</td><td></td></tr>
+</table>
+          @attr name com.wbw.iloveyou:angle
+        */
+        public static final int ShimmerFrameLayout_angle = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#auto_start}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:auto_start
+        */
+        public static final int ShimmerFrameLayout_auto_start = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#base_alpha}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:base_alpha
+        */
+        public static final int ShimmerFrameLayout_base_alpha = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#dropoff}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:dropoff
+        */
+        public static final int ShimmerFrameLayout_dropoff = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#duration}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:duration
+        */
+        public static final int ShimmerFrameLayout_duration = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#fixed_height}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:fixed_height
+        */
+        public static final int ShimmerFrameLayout_fixed_height = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#fixed_width}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:fixed_width
+        */
+        public static final int ShimmerFrameLayout_fixed_width = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#intensity}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:intensity
+        */
+        public static final int ShimmerFrameLayout_intensity = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#relative_height}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:relative_height
+        */
+        public static final int ShimmerFrameLayout_relative_height = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#relative_width}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:relative_width
+        */
+        public static final int ShimmerFrameLayout_relative_width = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#repeat_count}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:repeat_count
+        */
+        public static final int ShimmerFrameLayout_repeat_count = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#repeat_delay}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:repeat_delay
+        */
+        public static final int ShimmerFrameLayout_repeat_delay = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#repeat_mode}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>restart</code></td><td>1</td><td></td></tr>
+<tr><td><code>reverse</code></td><td>2</td><td></td></tr>
+</table>
+          @attr name com.wbw.iloveyou:repeat_mode
+        */
+        public static final int ShimmerFrameLayout_repeat_mode = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#shape1}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>linear</code></td><td>0</td><td></td></tr>
+<tr><td><code>radial</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name com.wbw.iloveyou:shape1
+        */
+        public static final int ShimmerFrameLayout_shape1 = 13;
+        /**
+          <p>This symbol is the offset where the {@link com.wbw.iloveyou.R.attr#tilt}
+          attribute's value can be found in the {@link #ShimmerFrameLayout} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wbw.iloveyou:tilt
+        */
+        public static final int ShimmerFrameLayout_tilt = 14;
+    };
 }

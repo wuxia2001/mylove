@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">表白说爱你</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	 <string name="dialog_title">温馨提示</string>
+    <string name="dialog_message">是否真的要关闭程序 ？</string>
+    <string name="reset_message">是否真的还原初始设置？还原后你所做的设置都会被清空，请注意保存你自己 的设置！</string>
+	<string name="btn_color_picker">字体颜色选择</string>
+    	<string name="ok">确定</string>
+	<string name="cancle">取消</string>
+	<string name="firstrun">首次安装打开，友情提示，点击HOME键再速度点击返回键能进入设置界面，此提示仅出现这一次！</string>
+	<string name="configbackpic">自定议背景图片时，请把图片做成手机屏幕大小的图</string>
+	<string name="first_et_1">黄</string>
+	<string name="first_et_2">飞</string>
+	<string name="second_words">
+不知道我为什么在等待\n
+   直到你的出现\n
+ 我才真正的发现\n
+原来我所有的等待\n
+ 只为了你的出现\n  
+你是我的整个世界\n
+我想亲口对你说\n
+   我等你好久了，我爱你\n
+  我想牵着你的手 \n      
+  直到满头白发的那一天\n
+ 我愿意守护你生命里的精彩\n并陪你一直精彩下去\n
+我期待每一天可以和你说早安\n
+期待每一个夜晚道声晚安入梦乡 \n
+期待能带你去你所有想去的地方\n
+陪你闹看你笑历经你生命中所有点滴\n	
+我期待一生能牵着你的手一直走下去\n
+走到尽头再回过头看尽一生铅华满地\n	
+我愿爱你一生一世，相守到老			
+				</string>
+	<string name="thrid_f_et_1">一生一世</string>
+	<string name="thrid_f_et_2">不离不弃</string>
+	<string name="thrid_s_et_1">生死挈阔</string>
+	<string name="thrid_s_et_2">与子成说</string>
+	<string name="thrid_s_et_3">执子之手</string>
+	<string name="thrid_s_et_4">与子偕老</string>
+	<string name="sugg">如有任何意见或建议，或者需要完美适应屏幕或字体，都可以发送邮件到wuxia2001@sina.com，我会尽量解决您的问题！
+	    谢谢使用！</string>
+	    <string name="tishi">先点击菜单键，再马上点击返回键，能进入设置界面，此提示在第一次设置成功后将不会再出现！</string>
+</resources>
