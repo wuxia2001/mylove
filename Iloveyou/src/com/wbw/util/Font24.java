@@ -12,7 +12,7 @@ public class Font24 {
 	
     private final static int[] mask = {128, 64, 32, 16, 8, 4, 2, 1};
     private final static String ENCODE = "GB2312";
-    private final static String ZK16 = "Hzk24s";
+    private final static String ZK16 = "Hzk24h";
     
     private boolean[][] arr;
     int all_16_32 = 24;
