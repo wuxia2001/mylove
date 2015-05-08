@@ -1,7 +1,0 @@
-package com.wbw.iloveyou;
-
-import android.app.Activity;
-
-public class FourActivity extends Activity{
-
-}
