@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black_translucent">#50000000</color>
+    
+    <color name="bule">#bb3D8CB8</color>
+    <color name="white">#bbffffff</color>
+    <color name="grey">#bb9D9C9C</color>
+    <color name="black">#000000</color>
+    <color name="blue">#3A5FCD</color>
+    <color name="red">#CD0000</color>
+    <color name="littleblack">#1C1C1C</color>
+    <color name="wblue">#0000ff</color>
+    <color name="green">#0f0</color>
+    <color name="lblue">#87CEFA</color>
+    <color name="deeppink">#FF1493</color> <!-- 深粉红色 -->
+    <color name="snow">#FFFAFA</color> <!-- 雪白色 -->
+    <color name="floralwhite">#FFFAF0</color> <!-- 花白色 -->
+    <color name="blanchedalmond">#FFEBCD</color> <!-- 白杏色 -->
+    <color name="mistyrose">#FFE4E1</color> <!-- 浅玫瑰色 -->
+    <color name="peachpuff">#FFDAB9</color> <!-- 桃色 -->
+    <color name="gold">#FFD700</color> <!-- 金色 -->
+    <color name="pink">#FFC0CB</color> <!-- 粉红色 -->
+    <color name="honeydew">#F0FFF0</color> <!-- 蜜色 -->
+    <color name="mediumorchid">#BA55D3</color> <!-- 中粉紫色 -->
+    <color name="powderblue">#B0E0E6</color> <!-- 粉蓝色 -->
+    <color name="aqua">#00FFFF</color> <!-- 浅绿色 -->
+    <color name="cyan">#00FFFF</color> <!-- 青色 -->
+    <color name="springgreen">#00FF7F</color> <!-- 春绿色 -->
+    <color name="lime">#00FF00</color> <!-- 酸橙色 -->
+    <color name="mediumspringgreen">#00FA9A</color> <!-- 中春绿色 -->
+    <color name="darkturquoise">#00CED1</color> <!-- 暗宝石绿 -->
+    <color name="deepskyblue">#00BFFF</color> <!-- 深天蓝色 -->
+    <color name="blueblue">#99def7</color>
+    <color name="huang">#ffff00</color>
+    <color name="love_pink">#feacb8</color>
+    <color name="four_string">#6f3b3d</color>
+</resources>

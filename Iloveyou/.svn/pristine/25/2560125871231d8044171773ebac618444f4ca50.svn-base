@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/four_bg_bit"
+    android:orientation="vertical" >
+
+    <com.wbw.widget.shimmer.ShimmerFrameLayout
+        android:id="@+id/sf_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="10dp" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/four_zi" />
+    </com.wbw.widget.shimmer.ShimmerFrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_middle_love"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+         >
+
+        <ImageView
+            android:id="@+id/iv_love_picture"
+            android:layout_width="473px"
+            android:layout_height="473px"
+            android:layout_alignBottom="@+id/iv_love_love"
+            android:layout_alignLeft="@+id/iv_love_love"
+            android:layout_alignRight="@+id/iv_love_love"
+            android:layout_alignTop="@+id/iv_love_love"
+            android:layout_centerInParent="true"
+            android:background="@drawable/sample"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/iv_love_love"
+            android:layout_width="530px"
+            android:layout_height="473px"
+            android:layout_centerInParent="true"
+            android:background="@drawable/four_love_pic"
+            android:scaleType="fitCenter" />
+
+        <com.wbw.widget.svg.CustomShapeImageView
+            android:id="@+id/csi_top_left"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample"
+            app:shape="circle" />
+
+        <com.wbw.widget.svg.CustomShapeImageView
+            android:id="@+id/csi_top_right"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample"
+            app:shape="circle" />
+
+        <com.wbw.widget.svg.CustomShapeSquareImageView
+            android:id="@+id/csi_bottom_left"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="25dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample"
+            app:shape="svg"
+            app:svg_raw_resource="@raw/shape_heart" />
+
+        <com.wbw.widget.svg.CustomShapeSquareImageView
+            android:id="@+id/csi_bottom_right"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample"
+            app:shape="svg"
+            app:svg_raw_resource="@raw/shape_heart" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@color/love_pink"
+        android:src="@drawable/four_love_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_left_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="程序员"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic" />
+
+        <TextView
+            android:id="@+id/tv_right_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="程序员"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <com.wbw.widget.shimmer.FlyTxtView
+            android:id="@+id/ftv_say_love1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+</LinearLayout>
